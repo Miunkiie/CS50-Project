@@ -1,0 +1,1 @@
+console.log("Hurry up and start")
