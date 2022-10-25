@@ -205,10 +205,11 @@ const getUserProfile = asyncHandler (async (req, res) => {
 // @Route GET /api/users
 // @access PrivateAdmin
 const getAllProfile = asyncHandler (async (req, res) => {
-    const allUsers = await User.find({});
+    const allUsers = await User.find({})
 
     res.json(allUsers)
 })
+
 
 // Generate JWT
 const generateToken = (id) => {
