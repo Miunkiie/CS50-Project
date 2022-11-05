@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 // @desc Retrieves the newsest arrivals - homepage for the website
 // @Route GET /api/
 // @access Public
-const getHomepage = asyncHandler ( async (req,res) => {
+const getHomepage = asyncHandler (async (req,res) => {
     // Retrieves the newest arrivals based on the time they were first created
     const newArrivals = await Products.find({}).sort('-createdAt').limit(10).exec()
     
@@ -178,7 +178,6 @@ const createReview  = asyncHandler (async (req, res) => {
     }
 
     const reviewed = product.reviews.find(currProduct => currProduct.user.toString() === req.user._id.toString()) 
-    console.log(product.rating)
     if (reviewed) {
         res.status(405)
         throw new Error("You have already reviewed this product")
@@ -196,7 +195,6 @@ const createReview  = asyncHandler (async (req, res) => {
     product.numOfReviews = product.reviews.length;
     product.rating = product.reviews.reduce((acc, review) => acc + review.rating, 0) / product.numOfReviews
 
-    console.log(product.rating)
     await product.save()
     
     res.status(201).json({message: "Review created"})
