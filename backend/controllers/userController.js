@@ -8,6 +8,7 @@ const User = require('../model/userModel')
 // @access Public
 const registerUser = asyncHandler (async (req, res) => {
     const { email, name, password, confirmPassword } = req.body
+    sessionId= req.sessionID
     
     // Checks if user has completed all fields
     if (!email || !name || !password || !confirmPassword) {
@@ -35,7 +36,8 @@ const registerUser = asyncHandler (async (req, res) => {
     const user = await User.create({
         email,
         name,
-        password: hashedPw
+        password: hashedPw,
+        sessionId: sessionId,
     })
 
     // If successful in creating user, send back jwt & user details
@@ -45,6 +47,7 @@ const registerUser = asyncHandler (async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            sessionId,
             token: generateToken(user._id),
         })
     } else {
@@ -75,6 +78,7 @@ const loginUser = asyncHandler (async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            sessionId: user.sessionId,
             token: generateToken(user._id),
         })
     } else {
@@ -103,7 +107,7 @@ const getOwnProfile = asyncHandler(async (req, res) => {
     }
 })
 
-// @desc Update user profile
+// @desc Update profile
 // @Route PUT /api/users/profile
 // @access Private
 const updateOwnProfile = asyncHandler(async (req, res) => {

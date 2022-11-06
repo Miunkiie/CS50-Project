@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
     sessionId: {
         type: String,
         required: true
-    }
+    },
 }, {timestamps: true})
 
 // Static to hash the user's password
