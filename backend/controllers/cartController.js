@@ -12,6 +12,8 @@ const getCart = asyncHandler(async(req, res) => {
 
     const cart = await Cart.findOne({id})
 
+    console.log(req.session.user)
+
     if (!cart) {
         res.status(404)
         throw new Error("Could not find cart")

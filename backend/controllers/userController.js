@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../model/userModel')
 
@@ -8,7 +6,7 @@ const User = require('../model/userModel')
 // @access Public
 const registerUser = asyncHandler (async (req, res) => {
     const { email, name, password, confirmPassword } = req.body
-    sessionId= req.sessionID
+    sessionId = req.sessionID
     
     // Checks if user has completed all fields
     if (!email || !name || !password || !confirmPassword) {
@@ -30,8 +28,8 @@ const registerUser = asyncHandler (async (req, res) => {
     }
 
     // Encrypt the password to store into database
-    hashedPw = await User.encryptPw(password)
-
+    const hashedPw = await User.encryptPw(password)
+    
     // Create user within the db
     const user = await User.create({
         email,
@@ -48,7 +46,7 @@ const registerUser = asyncHandler (async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             sessionId,
-            token: generateToken(user._id),
+            token: await User.generateToken(user._id),
         })
     } else {
         res.status(400)
@@ -79,7 +77,7 @@ const loginUser = asyncHandler (async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             sessionId: user.sessionId,
-            token: generateToken(user._id),
+            token: await User.generateToken(user._id),
         })
     } else {
         res.status(400)
@@ -214,14 +212,6 @@ const getAllProfile = asyncHandler (async (req, res) => {
     res.json(allUsers)
 })
 
-
-// Generate JWT
-const generateToken = (id) => {
-    // Signs the user id passed in with the secret from the env 
-    return jwt.sign({id}, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-    })
-}
 
 module.exports = {
     registerUser,
