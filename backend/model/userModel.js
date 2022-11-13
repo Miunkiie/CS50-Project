@@ -20,10 +20,10 @@ const userSchema = mongoose.Schema({
         required: true,
         default: false,
     },
-    sessionId: {
-        type: String,
-        required: true,
-    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart'
+    }
 }, {timestamps: true})
 
 // Static to hash the user's password
