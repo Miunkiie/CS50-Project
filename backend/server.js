@@ -15,8 +15,8 @@ const port = process.env.PORT || 5000;
 const colors = require('colors');
 
 const session = require('express-session');
-const passport = require('passport');
-const localStrategy = require('passport-local').Strategy
+const MongoDBStore = require('connect-mongodb-session')(session)
+
 // Generate uniq id
 const { v4: uuidv4 } = require('uuid');
 
@@ -24,6 +24,12 @@ connectDB();
 
 // Init express
 const app = express();
+
+const store = new MongoDBStore({
+    uri: process.env.MONGO_URI,
+    databaseName: 'test',
+    collections: 'sessions'
+})
 
 // Generates a session each time a new user visits the page
 app.use(session({
@@ -33,11 +39,8 @@ app.use(session({
     secret: 'SECRET',
     resave: false,
     saveUninitialized: true,
+    store: store,
 }));
-
-app.use(passport.initialize());
-app.use(passport.session);
-
 
 
 // Allows our app to parse through the request's body data

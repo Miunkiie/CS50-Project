@@ -9,10 +9,14 @@ const mongoose = require('mongoose')
 // @access Public
 const getCart = asyncHandler(async(req, res) => {
     const id = req.sessionID
+    let cart;
 
-    const cart = await Cart.findOne({id})
-
-    console.log(req.session.user)
+    // If the user's logged in, we will retrieve the cart via it's ID
+    if (req.session.isUser) {
+        cart = await Cart.findById(req.session.cart)
+    } else {
+        cart = await Cart.findOne({id})
+    }
 
     if (!cart) {
         res.status(404)
@@ -34,7 +38,13 @@ const getCart = asyncHandler(async(req, res) => {
 const addItem = asyncHandler(async(req, res) => {
     const id = req.sessionID
     const {quantity, productId} = req.body
-    const cart = await Cart.findOne({id})
+    let cart;
+
+    if (req.session.isUser) {
+        cart = await Cart.findById(req.session.cart)
+    } else {
+        cart = await Cart.findOne({id})
+    }
 
     // Validates the product being added to the cart
     const product = await Product.findById(productId)
@@ -52,8 +62,8 @@ const addItem = asyncHandler(async(req, res) => {
             total: product.price * quantity
         })
         res.status(201).json(newCart)
-    } else {
 
+    } else {
         // Searches the cart for the product via the product's id
         const item = cart.products.findIndex((item) => item._id == productId) 
 
@@ -90,9 +100,14 @@ const addItem = asyncHandler(async(req, res) => {
 const deleteItem = asyncHandler(async(req, res) => {
     const id = req.sessionID
     const {quantity, productId} = req.body
-
-    const cart = await Cart.findOne({id})
-
+    let cart;
+    
+    if (req.session.isUser) {
+        cart = await Cart.findById(req.session.cart)
+    } else {
+        cart = await Cart.findOne({id})
+    }
+    
     if (!cart) {
         res.status(404)
         throw new Error("Could not retrieve cart")

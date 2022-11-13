@@ -70,6 +70,7 @@ const loginUser = asyncHandler (async (req, res) => {
     const user = await User.findOne({email}).setOptions({ sanitizeFilter: true })
 
     req.session.isUser = true
+    req.session.cart = user.cart
 
     // Authenticates the user
     if (user && (await user.verifyPw(password))) {
@@ -78,7 +79,6 @@ const loginUser = asyncHandler (async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            sessionId: user.sessionId,
             token: await User.generateToken(user._id),
         })
     } else {
@@ -136,6 +136,26 @@ const updateOwnProfile = asyncHandler(async (req, res) => {
     } else {
         res.status(404)
         throw new Error("User not found")
+    }
+})
+
+
+// @desc logout profile
+// @Route DELETE /api/users/profile
+// @access Private
+const logout = asyncHandler(async(req,res) => {
+    // Checks if there's a session
+    if (req.session) {
+        req.session.destroy((err) =>{
+            if (err) {
+                res.status(400)
+                throw new Error('Unable to logout')
+            } else {
+                res.status(200).json("Logged out succesfully")
+            }
+        })
+    } else {
+        res.redirect('../login')
     }
 })
 
@@ -220,6 +240,7 @@ module.exports = {
     loginUser,
     getOwnProfile,
     updateOwnProfile,
+    logout,
     updateUserProfile,
     deleteUserProfile,
     getUserProfile,
