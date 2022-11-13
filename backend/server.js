@@ -7,15 +7,16 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 
 const { errorHandler } = require('./middleware/errorMiddleware');
-const connectDB = require('./config/db')
+const connectDB = require('./config/db');
 
 const port = process.env.PORT || 5000;
 
 // Ultility to change the color of the terminal text. Easier to differentiate.
 const colors = require('colors');
 
-const session = require('express-session')
-
+const session = require('express-session');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy
 // Generate uniq id
 const { v4: uuidv4 } = require('uuid');
 
@@ -32,16 +33,20 @@ app.use(session({
     secret: 'SECRET',
     resave: false,
     saveUninitialized: true,
-    cookie: {path: '/'}
-}))
+}));
+
+app.use(passport.initialize());
+app.use(passport.session);
+
+
 
 // Allows our app to parse through the request's body data
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
-app.use("/api/users", require("./routes/userRoutes"))
-app.use("/api/", require("./routes/productRoutes"))
-app.use("/api/cart", require("./routes/cartRoutes"))
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/", require("./routes/productRoutes"));
+app.use("/api/cart", require("./routes/cartRoutes"));
 
 app.use(errorHandler);
 

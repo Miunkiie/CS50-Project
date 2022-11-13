@@ -6,7 +6,7 @@ const User = require('../model/userModel')
 // @access Public
 const registerUser = asyncHandler (async (req, res) => {
     const { email, name, password, confirmPassword } = req.body
-    sessionId = req.sessionID
+    const sessionId = req.sessionID
     
     // Checks if user has completed all fields
     if (!email || !name || !password || !confirmPassword) {
@@ -68,7 +68,9 @@ const loginUser = asyncHandler (async (req, res) => {
 
     // Find the user within the db
     const user = await User.findOne({email}).setOptions({ sanitizeFilter: true })
-    
+
+    req.session.isUser = true
+
     // Authenticates the user
     if (user && (await user.verifyPw(password))) {
         res.json({
