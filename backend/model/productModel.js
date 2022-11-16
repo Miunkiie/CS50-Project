@@ -80,6 +80,11 @@ const productSchema = mongoose.Schema({
         required: true,
         default: 0,
     },
+    discount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     stockCount: {
         type: Number,
         required: true,

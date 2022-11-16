@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const Cart = require('../model/cartModel')
+const User = require('../model/userModel')
 const Product = require('../model/productModel')
 const mongoose = require('mongoose')
 
@@ -8,16 +9,14 @@ const mongoose = require('mongoose')
 // @Route GET /api/cart
 // @access Public
 const getCart = asyncHandler(async(req, res) => {
-    const id = req.sessionID
     let cart;
 
     // If the user's logged in, we will retrieve the cart via it's ID
-    if (req.session.isUser) {
-        cart = await Cart.findById(req.session.cart)
+    if (req.session.user) {
+        cart = await Cart.findOne(req.session.user)
     } else {
-        cart = await Cart.findOne({id})
+        cart = req.session.cart
     }
-
     if (!cart) {
         res.status(404)
         throw new Error("Could not find cart")
@@ -36,14 +35,14 @@ const getCart = asyncHandler(async(req, res) => {
 // @Route POST /api/cart
 // @access Public
 const addItem = asyncHandler(async(req, res) => {
-    const id = req.sessionID
     const {quantity, productId} = req.body
     let cart;
 
-    if (req.session.isUser) {
-        cart = await Cart.findById(req.session.cart)
+    // If user is logged in, retrieves the saved cart from the server, otherwise from the session
+    if (req.session.user) {
+        cart = await Cart.findOne(req.session.user)
     } else {
-        cart = await Cart.findOne({id})
+        cart = req.session.cart
     }
 
     // Validates the product being added to the cart
@@ -56,12 +55,28 @@ const addItem = asyncHandler(async(req, res) => {
 
     // Create a new cart if none can be found
     if (!cart) {
-        const newCart = await Cart.create({
-            sessionId: id,
-            products: [{...product, quantity: quantity}],
-            total: product.price * quantity
-        })
-        res.status(201).json(newCart)
+        if (req.session.user) {
+            const newCart = await Cart.create({
+                user: req.session.user,
+                products: [{...product, quantity: Number(quantity)}],
+                total: product.price * quantity
+            })
+            res.status(201).json(newCart)
+        } else {
+            
+            req.session.cart = {
+                products: [{
+                    name: product.name,
+                    quantity: Number(quantity),
+                    price: product.price,
+                    discount: product.discount,
+                    images: product.images,
+                    _id: productId
+                }],
+                total: product.price * quantity
+            }
+            res.status(201).json(req.session.cart)
+        }
 
     } else {
         // Searches the cart for the product via the product's id
@@ -78,16 +93,34 @@ const addItem = asyncHandler(async(req, res) => {
             
             // Update the product in the cart
             cart.products[item] = product
-            await cart.save()   
+            
+            if (req.session.user) {
+                await cart.save()   
+            } else {
+                req.session.save()
+            }
 
             res.status(200).json(cart)
         } else {
 
             // Add new product in cart
-            cart.products.push(product)
-            cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
-
-            await cart.save()
+            if (req.session.user) {
+                cart.products.push(product)
+                cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
+                await cart.save()
+            } else {
+                
+                cart.products.push({
+                    name: product.name,
+                    quantity: Number(quantity),
+                    price: product.price,
+                    discount: product.discount,
+                    images: product.images,
+                    _id: productId
+                })
+                cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
+                req.session.save()
+            }
             res.status(200).json(cart)
         }
     }
@@ -98,14 +131,13 @@ const addItem = asyncHandler(async(req, res) => {
 // @Route DELETE /api/cart
 // @access Public
 const deleteItem = asyncHandler(async(req, res) => {
-    const id = req.sessionID
     const {quantity, productId} = req.body
     let cart;
     
-    if (req.session.isUser) {
-        cart = await Cart.findById(req.session.cart)
+    if (req.session.user) {
+        cart = await Cart.findOne(req.session.user)
     } else {
-        cart = await Cart.findOne({id})
+        cart = req.session.cart
     }
     
     if (!cart) {
@@ -125,7 +157,12 @@ const deleteItem = asyncHandler(async(req, res) => {
 
         cart.total = cart.products.reduce((acc, product) => acc + product.quantity * product.price, 0)
 
-        await cart.save()
+        if (req.session.user) {
+            await cart.save()
+        } else {
+            req.session.save()
+        }
+        
         res.status(200).json(cart)
     } else {
         res.status(404)

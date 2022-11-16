@@ -50,6 +50,7 @@ app.use(express.urlencoded({extended: false}));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/", require("./routes/productRoutes"));
 app.use("/api/cart", require("./routes/cartRoutes"));
+app.use("/api/order", require("./routes/orderRoutes"))
 
 app.use(errorHandler);
 

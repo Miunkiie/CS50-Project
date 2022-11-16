@@ -29,13 +29,13 @@ const orderSchema = mongoose.Schema({
         state: {type: String, required: true},
         postalCode: String
     },
-    subTotal: {Number, required: true},
-    shippingCost: {Number, required: true},
-    total: {Number, required: true},
-    paymentMethod: {String, required: true},
-    paymentStatus: {String, required: true},
-    orderStatus: {String, required: true},
-    trackingId: {String}
+    subTotal: {type: Number, required: true},
+    shippingCost: {type: Number, required: true},
+    total: {type: Number, required: true},
+    paymentMethod: {type: String, required: true},
+    paymentStatus: {type: String, required: true},
+    orderStatus: {type: String, required: true},
+    trackingId: {type: String}
 }, {timestamps: true})
 
 module.exports = mongoose.model('Order', orderSchema)
