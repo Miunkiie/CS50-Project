@@ -17,9 +17,10 @@ const getCart = asyncHandler(async(req, res) => {
     } else {
         cart = req.session.cart
     }
+    
     if (!cart) {
         res.status(404)
-        throw new Error("Could not find cart")
+        throw new Error("No cart found")
     }
 
     // Sends the cart if there it contains an item
@@ -50,7 +51,17 @@ const addItem = asyncHandler(async(req, res) => {
 
     if (!product) {
         res.status(404)
-        throw new Error("Could find product you were looking for")
+        throw new Error("Product not found")
+    }
+
+    // Template for adding new items to the cart
+    const newProduct = {
+        name: product.name,
+        quantity: Number(quantity),
+        price: product.price,
+        discount: product.discount,
+        images: product.images[0],
+        _id: productId
     }
 
     // Create a new cart if none can be found
@@ -58,31 +69,24 @@ const addItem = asyncHandler(async(req, res) => {
         if (req.session.user) {
             const newCart = await Cart.create({
                 user: req.session.user,
-                products: [{...product, quantity: Number(quantity)}],
+                products: [{...product, quantity: Number(quantity), images: product.images[0]}],
                 total: product.price * quantity
             })
             res.status(201).json(newCart)
         } else {
             
             req.session.cart = {
-                products: [{
-                    name: product.name,
-                    quantity: Number(quantity),
-                    price: product.price,
-                    discount: product.discount,
-                    images: product.images,
-                    _id: productId
-                }],
+                products: [newProduct],
                 total: product.price * quantity
             }
             res.status(201).json(req.session.cart)
         }
 
     } else {
-        // Searches the cart for the product via the product's id
+        // Searches the cart for the product via the product's id, returns -1 if no item match
         const item = cart.products.findIndex((item) => item._id == productId) 
 
-        // checks if the cart already contains the item 
+        // If item is already in cart 
         if (item != -1) {
             // Add the quantity of the item being added to the cart
             const product = cart.products[item]
@@ -91,7 +95,7 @@ const addItem = asyncHandler(async(req, res) => {
             // Update the total cost of the cart
             cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
             
-            // Update the product in the cart
+            // Updates the cart within the database
             cart.products[item] = product
             
             if (req.session.user) {
@@ -105,19 +109,13 @@ const addItem = asyncHandler(async(req, res) => {
 
             // Add new product in cart
             if (req.session.user) {
-                cart.products.push(product)
+
+                cart.products.push(newProduct)
                 cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
+                
                 await cart.save()
             } else {
-                
-                cart.products.push({
-                    name: product.name,
-                    quantity: Number(quantity),
-                    price: product.price,
-                    discount: product.discount,
-                    images: product.images,
-                    _id: productId
-                })
+                cart.products.push(newProduct)
                 cart.total = cart.products.reduce((acc, products) => acc + products.quantity * products.price, 0)
                 req.session.save()
             }

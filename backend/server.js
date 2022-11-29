@@ -25,6 +25,7 @@ connectDB();
 // Init express
 const app = express();
 
+// Store to store the session on the server
 const store = new MongoDBStore({
     uri: process.env.MONGO_URI,
     databaseName: 'test',
