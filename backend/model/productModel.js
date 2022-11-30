@@ -7,7 +7,7 @@ const reviewSchema = mongoose.Schema({
         required: true,
     },
     rating: {
-        type: Decimal128,
+        type: Number,
         required: true,
         min: 0,
         max: 5
@@ -64,7 +64,7 @@ const productSchema = mongoose.Schema({
     reviews: [reviewSchema],
         
     rating: {
-        type: Decimal128,
+        type: Number,
         required: true,
         default: 0,
         min: 0,
@@ -76,7 +76,7 @@ const productSchema = mongoose.Schema({
         default: 0
     },
     price: {
-        type: Decimal128,
+        type: Number,
         required: true,
         default: 0,
     },
