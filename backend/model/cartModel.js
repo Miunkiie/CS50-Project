@@ -9,7 +9,7 @@ const cartSchema = mongoose.Schema({
     products: [{
         name: {type: String, required: true},
         quantity: {type: Number, required: true, default: 1, min: 1},
-        price: {type: Number, required: true},
+        price: {type: Decimal128, required: true},
         discount: {type: Number, required: true, default: 0},
         images: {type: String, required: true},
         _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product'}
