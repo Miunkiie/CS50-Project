@@ -1,10 +1,10 @@
 const asyncHandler = require('express-async-handler')
 const Order = require('../model/orderModel')
 const Cart = require('../model/cartModel')
-const User = require('../model/userModel')
 const mongoose = require('mongoose')
 const ShortUniqueId = require('short-unique-id')
-const {sendEmail} = require('../middleware/EmailMiddleware')
+const {sendEmail} = require('../config/Nodemailer')
+
 
 // @desc Checkout
 // @Route POST /api/order/guest-checkout
@@ -39,10 +39,14 @@ const guestCheckout = asyncHandler(async(req, res) => {
     const trackingId = new ShortUniqueId({ length: 10 });
     
     // Send confirmation email of the purchase to the user
-    const email = await sendEmail({
+    const email = sendEmail({
         email: payload.email,
         subject: "OzzieSales: confirmation email",
-        text: `Thank you for your purhcase. Your order will be shipped soon.\n\nHere's your tracking id: ${trackingId()}`
+        text: `Thank you for your purhcase. Your order will be shipped soon.\n\nHere's your tracking id: ${trackingId()}`,
+        html: `<p>Thank you for your purhcase. Your order will be shipped soon.<br><br>
+        Here's your tracking id: <a href=https://www.dhl.com/au-en/home/tracking/tracking-global-forwarding.html?submit=1&tracking-id=${trackingId()}> ${trackingId()}</a><br>
+        It may take some time before you can track your shipment on the website.
+        </p>`
     })
     
     res.status(200).json("Confirmation email has been sent")
@@ -80,7 +84,7 @@ const userCheckout = asyncHandler(async(req, res) => {
         res.status(404)
         throw new Error("Could not find cart")
     }
-    console.log(typeof(payload.shippingAddress))
+
     if (!payload.shippingAddress || !payload.billingAddress) {
         res.status(400)
         throw new Error("Please enter your shipping/billing address")
@@ -108,11 +112,26 @@ const userCheckout = asyncHandler(async(req, res) => {
         paymentStatus: "Paid",
         orderStatus: "Shipped"        
     })
-
-    console.log(cart)
-    res.json(cart)
-
-
+    
+    if (!newOrder) {
+        res.status(400)
+        throw new Error("Could not create order")
+    }
+    
+    const trackingId = new ShortUniqueId({ length: 10 });
+    
+    // Send confirmation email of the purchase to the user
+    const email = sendEmail({
+        email: payload.email,
+        subject: "OzzieSales: confirmation email",
+        text: `Thank you for your purhcase. Your order will be shipped soon.\n\nHere's your tracking id: ${trackingId()}`,
+        html: `<p>Thank you for your purhcase. Your order will be shipped soon.<br><br>
+        Here's your tracking id: <a href=https://www.dhl.com/au-en/home/tracking/tracking-global-forwarding.html?submit=1&tracking-id=${trackingId()}> ${trackingId()}</a><br>
+        It may take some time before you can track your shipment on the website.
+        </p>`
+    })
+    
+    res.status(200).json("Confirmation email has been sent")
 })
 
 

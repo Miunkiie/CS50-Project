@@ -18,7 +18,8 @@ const sendEmail = asyncHandler(async options => {
         from: process.env.NODEMAILER_EMAIL,
         to: options.email,
         subject: options.subject,
-        text: options.text  
+        text: options.text,
+        html: options.html  
     }
 
     const info = await transporter.sendMail(message, (err, res) => {

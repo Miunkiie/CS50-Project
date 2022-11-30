@@ -10,8 +10,8 @@ const orderSchema = mongoose.Schema({
         quantity: {type: Number, required: true, default: 1, min: 1},
         price: {type: Number, required: true},
         discount: {type: Number, required: true, default: 0},
-        image: {type: String, required: true},
-        productId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product'}
+        images: {type: String, required: true},
+        _id: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product'}
     }],
     shippingAddress: {
         country: {type: String, required: true},
