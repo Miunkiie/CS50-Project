@@ -1,13 +1,13 @@
-import { FaSignInAlt, FaSignOutAlt, FaShoppingCart, FaUser, FaRegUser, FaCentercode } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaShoppingCart, FaUser, FaRegUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 function Header() {
   return (
     <header className='header'>
-        <div>
-            <Link to='/'>Elite</Link>
+        <div className="logo">
+            <Link to='/'>Generic</Link>
         </div>
-        <ul>
+        <ul className='menu-header'>
             <li>
                 <Link to='/Men'>Men</Link>
             </li>
@@ -20,13 +20,18 @@ function Header() {
         </ul>
         <ul>
             <li>
+                <Link to='/Cart'>
+                    <FaShoppingCart />
+                </Link>
+            </li>
+            <li>
                 <Link to='/SignIn'>
-                    <FaSignInAlt /> Sign In
+                    <FaSignInAlt />Sign In
                 </Link>
             </li>
             <li>
                 <Link to='/SignUp'>
-                    <FaRegUser /> Join us!
+                    <FaRegUser />Join us!
                 </Link>
             </li>
         </ul>
