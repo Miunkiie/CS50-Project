@@ -12,6 +12,7 @@
   "author": "D.Wang",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.2.1",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "connect-mongodb-session": "^3.1.1",
@@ -26,6 +27,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "nodemon": "^2.0.19"
   }
 }

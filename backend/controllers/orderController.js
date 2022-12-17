@@ -48,6 +48,9 @@ const guestCheckout = asyncHandler(async(req, res) => {
         It may take some time before you can track your shipment on the website.
         </p>`
     })
+
+    // Delete cart once order has been completed
+    req.session.cart = null;
     
     res.status(200).json("Confirmation email has been sent")
 })
@@ -131,6 +134,9 @@ const userCheckout = asyncHandler(async(req, res) => {
         </p>`
     })
     
+    // Remove cart
+    cart.deleteOne()
+
     res.status(200).json("Confirmation email has been sent")
 })
 

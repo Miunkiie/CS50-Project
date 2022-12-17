@@ -70,7 +70,7 @@ const loginUser = asyncHandler (async (req, res) => {
     const user = await User.findOne({email}).setOptions({ sanitizeFilter: true })
 
     req.session.user = user._id
-
+    
     // Authenticates the user
     if (user && (await user.verifyPw(password))) {
         res.json({
