@@ -40,14 +40,10 @@ const registerUser = asyncHandler (async (req, res) => {
 
     // If successful in creating user, send back jwt & user details
     if (user) {
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            sessionId,
-            token: await User.generateToken(user._id),
-        })
+        res.status(201).json(
+            "Successfully registered user!"
+        )
+
     } else {
         res.status(400)
         throw new Error("Invalid user data")
@@ -68,17 +64,12 @@ const loginUser = asyncHandler (async (req, res) => {
 
     // Find the user within the db
     const user = await User.findOne({email}).setOptions({ sanitizeFilter: true })
-
-    req.session.user = user._id
     
     // Authenticates the user
     if (user && (await user.verifyPw(password))) {
+        const token = await User.generateToken(user._id)
         res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            token: await User.generateToken(user._id),
+            token: token,
         })
     } else {
         res.status(400)
