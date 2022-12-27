@@ -16,6 +16,8 @@ const colors = require('colors');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session)
+const cors = require('cors')
+const cookieParser = require('cookie-parser') 
 
 // Generate uniq id
 const { v4: uuidv4 } = require('uuid');
@@ -38,10 +40,26 @@ app.use(session({
         return uuidv4();
     },
     secret: 'SECRET',
+    origin: 'http://localhost:3000/',
+    creditentials: true,
     resave: false,
     saveUninitialized: true,
     store: store,
+    cookie: {
+        httpOnly: false,
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24 * 30
+    }
 }));
+
+const corsOptions = {
+    origin: 'http://localhost:3000', 
+    credentials: true,
+};
+
+app.use(cookieParser())
+app.use(cors(corsOptions));
+
 
 
 // Allows our app to parse through the request's body data

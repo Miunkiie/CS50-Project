@@ -41,7 +41,7 @@ const registerUser = asyncHandler (async (req, res) => {
     // If successful in creating user, send back jwt & user details
     if (user) {
         res.status(201).json(
-            "Successfully registered user!"
+            "Registered user!"
         )
 
     } else {
@@ -68,9 +68,9 @@ const loginUser = asyncHandler (async (req, res) => {
     // Authenticates the user
     if (user && (await user.verifyPw(password))) {
         const token = await User.generateToken(user._id)
-        res.json({
-            token: token,
-        })
+        req.session.token = token
+        
+        res.cookie('token', req.session.token).status(200).json("Logged In")
     } else {
         res.status(400)
         throw new Error("Invalid credentials")
