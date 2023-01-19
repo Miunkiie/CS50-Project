@@ -1,5 +1,5 @@
-import { FaSignInAlt, FaSignOutAlt, FaShoppingCart, FaUser, FaRegUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import NavMenu from './navMenu/NavMenu.jsx'
 
 function Header() {
   return (
@@ -9,7 +9,7 @@ function Header() {
         </div>
         <ul className='menu-header'>
             <li>
-                <Link to='/Men'>Men</Link>
+                <Link to="/Men">Men</Link>
             </li>
             <li>
                 <Link to='/Women'>Women</Link>
@@ -18,23 +18,7 @@ function Header() {
                 <Link to='/Kids'>Kids</Link>
             </li>
         </ul>
-        <ul>
-            <li>
-                <Link to='/Cart'>
-                    <FaShoppingCart />
-                </Link>
-            </li>
-            <li>
-                <Link to='/SignIn'>
-                    <FaSignInAlt />Sign In
-                </Link>
-            </li>
-            <li>
-                <Link to='/SignUp'>
-                    <FaRegUser />Join us!
-                </Link>
-            </li>
-        </ul>
+        <NavMenu />
     </header>
   )
 }

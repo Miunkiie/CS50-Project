@@ -28,7 +28,8 @@ function SignIn() {
       navigate('/')
     }
 
-    dispatch(reset)
+    dispatch(reset())
+    
   }, [user, isSuccess, isError, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -68,7 +69,7 @@ function SignIn() {
             </div>
             <div className="form-group">
               <button type='submit' className='btn btn-block'>
-                Sign In
+                Login
               </button>
             </div>
           </form>

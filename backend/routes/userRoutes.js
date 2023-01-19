@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.route('/').post(registerUser).get(protect,getAllProfile)
 router.route('/login').post(loginUser)
-router.route('/profile').get(protect, getOwnProfile).put(protect, updateOwnProfile).delete(protect, logout)
+router.route('/profile').get(protect, getOwnProfile).put(protect, updateOwnProfile).post(protect, logout)
 
 /* Admin privileges */
 

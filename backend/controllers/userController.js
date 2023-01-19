@@ -40,9 +40,7 @@ const registerUser = asyncHandler (async (req, res) => {
 
     // If successful in creating user, send back jwt & user details
     if (user) {
-        res.status(201).json(
-            "Registered user!"
-        )
+        res.status(201).json("Registered user!")
 
     } else {
         res.status(400)
@@ -70,7 +68,7 @@ const loginUser = asyncHandler (async (req, res) => {
         const token = await User.generateToken(user._id)
         req.session.token = token
         
-        res.cookie('token', req.session.token).status(200).json("Logged In")
+        res.cookie('token', req.session.token).status(200).json({token})
     } else {
         res.status(400)
         throw new Error("Invalid credentials")
@@ -82,14 +80,13 @@ const loginUser = asyncHandler (async (req, res) => {
 // @access Private
 const getOwnProfile = asyncHandler(async (req, res) => {
     // Get user display by finding their _id in the database. 
-    const user = await User.findById(req.user._id)
+    const user = req.user
 
     if (user) {
         res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
         })
     } else {
         res.status(404)
@@ -131,11 +128,12 @@ const updateOwnProfile = asyncHandler(async (req, res) => {
 
 
 // @desc logout profile
-// @Route DELETE /api/users/profile
+// @Route POST /api/users/profile
 // @access Private
-const logout = asyncHandler(async(req,res) => {
-    // Checks if there's a session
+const logout = asyncHandler(async (req,res) => {
+    // Clears the session, and the cookie from the client.
     if (req.session) {
+        res.clearCookie('token')
         req.session.destroy((err) =>{
             if (err) {
                 res.status(400)
@@ -204,10 +202,8 @@ const deleteUserProfile = asyncHandler (async (req, res) => {
 // @Route GET /api/users/:id
 // @access PrivateAdmin
 const getUserProfile = asyncHandler (async (req, res) => {
-    const user = await User.findById(req.params.id).select("-password")
-
-    if (user) {
-        res.json(user)
+    if (req.user) {
+        res.json(req.user)
 
     } else {
         res.status(404)

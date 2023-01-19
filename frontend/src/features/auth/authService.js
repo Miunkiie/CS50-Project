@@ -17,10 +17,25 @@ const login = async (userData) => {
     return response.data
 }
 
+// Logout user
+const logout = async (token) => {
+    // Setting JWT token to our request header
+    const config = {
+        headers: {
+            Authorization: `Bearer ${ token }`
+        },
+        withCredentials: true
+    }
+
+    const response = await axios.post(API_URL + 'profile', {}, config)
+
+    return response.data
+}
 
 const authService = {
     register,
-    login
+    login,
+    logout
 }
 
 export default authService

@@ -27,7 +27,7 @@ function SignUp() {
     }
 
     if (isSuccess || user ) {
-      navigate('./')
+      navigate('/SignIn')
     }
 
     // Reset the auth state after ever event
