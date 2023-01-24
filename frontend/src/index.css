@@ -54,11 +54,14 @@ h1 svg {
 }
 
 .container {
-  width: 100%;
-  max-width: 960px;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+  width: 75%;
 }
 
 .header {
@@ -69,7 +72,7 @@ h1 svg {
   font-family: 'Bebas Neue', cursive;
   font-size: 22px;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 45px;
   padding: 0 1rem;
   min-width: 900px;
 }
@@ -137,6 +140,12 @@ h1 svg {
 
 .heading p {
   color: #828282;
+}
+
+section.heading {
+  margin-bottom: 20px;
+  margin-top: 60px;
+  width: 100%;
 }
 
 .form,
@@ -234,7 +243,24 @@ h1 svg {
   }
 }
 
-@media (max-width: 600px) {
+.hero-banner {
+  height: 30%;
+  margin-bottom: 20px;
+  width: 1400px;
+}
+
+.section-heading {
+  display: inline-flex;
+  align-items: center;
+}
+
+.section-heading svg {
+  width: 50px;
+}
+
+/*   MEDIA  */
+
+@media (min-width: 600px) {
   .form {
     width: 90%;
   }
