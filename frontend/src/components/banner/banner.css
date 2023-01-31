@@ -1,0 +1,10 @@
+.banner {
+    border: 1px outset #f1ee36;
+    border-radius: 5px;
+    background-color: #e7c504;
+    background-size: cover;
+    font-size: 1.10rem;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
