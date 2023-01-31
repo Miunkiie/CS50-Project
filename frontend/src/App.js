@@ -7,7 +7,7 @@ import Women from './pages/Women'
 import Kids from './pages/Kids'
 import Homepage from './pages/Homepage'
 import Profile from './pages/Profile'
-import Banner from './components/banner/Banner';
+import Banner from './components/banner/Banner'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
