@@ -1,37 +1,22 @@
-import React, { useState } from 'react'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./carousel.css";
 
-import './carousel.css'
+function Carousel({children}) {
 
-function Carousel(props) {
-  // Function to change the view of the picture
-  const [activeIndex, setActiveIndex] = useState(0)
+    let settings = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
 
-  const updateIndex = (index) => {
-    if (index < 0) {
-      index = 0
-    } else if (index >= React.Children.count(props.children)) {
-      index = 0
-    }
-
-    setActiveIndex(index)
-  }
-  
   return (
-    <div className="carousel">
-      <div className="inner" style={{transform: `translateX(-${activeIndex * 100}%)`}}>
-        {React.Children.map(props.children, (child, index) => {
-          return React.cloneElement(child)
-        })}
-      </div>
-      <div className="indicators">
-        <button onClick={() => {updateIndex(activeIndex - 1)}}>
-          prev
-        </button>
-        <button onClick={() => {updateIndex(activeIndex + 1)}}>
-          next
-        </button>
-      </div>
-    </div>
+    <Slider {...settings}>
+      {children}                      
+    </Slider>
   )
 }
 export default Carousel

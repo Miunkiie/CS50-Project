@@ -1,9 +1,7 @@
-import './carousel.css'
-
-function CarouselItem(props) {
+function CarouselItem({image, alt}) {
   return (
-    <div className="carousel-item">
-        {props.children}
+    <div>
+        <img src={image} alt={alt}/>
     </div>
   )
 }
