@@ -9,6 +9,7 @@
   --border: 1px solid #474a4d;
   --border-radius: 8px;
   --speed: 500ms;
+  --heading-font: 'Bebas Neue', cursive;
 }
 
 * {
@@ -72,7 +73,6 @@ h1 svg {
   font-family: 'Bebas Neue', cursive;
   font-size: 22px;
   justify-content: space-between;
-  margin-bottom: 45px;
   padding: 0 1rem;
   min-width: 900px;
 }

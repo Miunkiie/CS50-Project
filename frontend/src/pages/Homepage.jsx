@@ -1,7 +1,8 @@
 import clearanceBanner from "../assets/images/ClearanceBanner.png"
 import Carousel from "../components/carousel/Carousel"
-import CarouselItem from "../components/carousel/CarouselItem"
+import CarouselItem from '../components/carousel/CarouselItem'
 import { RxDividerHorizontal } from "react-icons/rx"
+import placeholder from '../assets/images/placeholder.jpg'
 
 function Homepage() {
   return (
@@ -13,14 +14,17 @@ function Homepage() {
           New Arrivals
           <RxDividerHorizontal className="section-divider"/>
         </h2>
-        <Carousel>
-          <CarouselItem>Item 1</CarouselItem>
-          <CarouselItem>Item 2</CarouselItem>
-          <CarouselItem>Item 3</CarouselItem>
-          <CarouselItem>Item 4</CarouselItem>
-        </Carousel>
       </section>
-      </div>
+      <Carousel>
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+        <CarouselItem image={placeholder} alt={""} />
+      </Carousel>
+    </div>
   )
 }
 export default Homepage
