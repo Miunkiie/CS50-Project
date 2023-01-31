@@ -2,9 +2,14 @@
     width: 100%;
 }
 
+.slick-slide img {
+    display: inline-flex;
+}
+
 .slick-prev {
     left: -35px;
 }
+
 .slick-prev:before {
     color: rgb(63, 62, 62);
     font-size: 30px;
