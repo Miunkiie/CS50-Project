@@ -1,12 +1,29 @@
 import { FaSignInAlt, FaUserCircle, FaShoppingCart, FaRegUser } from 'react-icons/fa'
-import {useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout, reset } from '../../features/auth/authSlice'
 import NavItem from '../navItems/NavItem'
 import DropDownMenu from '../dropDownMenu/DropDownMenu'
+import DropDownItem from '../dropDownMenu/DropDownItem'
 
 import './NavMenu.css'
+import '../navItems/NavItem.css'
 
-function NavMenu(props) {
+function NavMenu() {
   const {user} = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+  // Retrieves the token from the cookie
+  const token = document.cookie.split('; ').filter(row => row.startsWith('token')).map(c=>c.split('=')[1])[0]
+
+  const onLogout = () => {
+    dispatch(logout(token))
+    dispatch(reset())
+
+    navigate('/')
+  }
+
 
   return (
     <ul className="navbar-nav">
@@ -14,11 +31,14 @@ function NavMenu(props) {
       {/* Displays logout if there user is logged in */}
       {user ? (<>
         <NavItem icon={<FaUserCircle />} >
-          <DropDownMenu />
+          <DropDownMenu>
+            <DropDownItem link="/Profile" text="Profile" />
+            <DropDownItem text="Logout" onClick={onLogout} />
+          </DropDownMenu>
         </NavItem>
         </>) : (<>
-        <NavItem icon={<FaSignInAlt />} link="/SignIn" text="Login" />
-        <NavItem icon={<FaRegUser />} link="/SignUp" text="Register" />
+        <NavItem icon={<FaSignInAlt />} link="/SignIn"/>
+        <NavItem icon={<FaRegUser />} link="/SignUp" />
       </>)}
     </ul>
   )
