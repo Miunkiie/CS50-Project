@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
-import NavMenu from './navMenu/NavMenu.jsx'
+import NavMenu from '../navMenu/NavMenu.jsx'
+
+import './header.css'
 
 function Header() {
   return (

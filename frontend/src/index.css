@@ -58,57 +58,13 @@ h1 svg {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
-  padding: 0 10px;
   text-align: center;
   width: 80%;
 }
 
-.header {
-  align-items: center;
-  background-color: var(--bg);
-  border-bottom: 1px solid #e6e6e6;
-  display: inline-flex;
-  font-family: 'Bebas Neue', cursive;
-  font-size: 22px;
-  padding: 0 1rem;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.logo {
-  background-color: #8F3737;
-  font-size: 26px;
-  padding: 8px;
-}
-
-.menu-header {
-  display: flex;
-}
-
-.menu-header li {
-  border-color: #6F6A6A;
-  border-style: solid;
-  border-width: 0 0.1px;
-  font-size: 26px;
-  margin-left: 0 !important;
-  padding: 0 40px;
-}
-
-.header ul li a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header ul li a:hover {
-  color: #8F3737;
-}
-
-.header ul li a svg {
-  padding-bottom: 5px;
-  padding-left: 5px;
+.icon-button {
   width: 25px;
-  height: 2.5rem;
+  margin-left: 0.5rem;
 }
 
 .heading {
@@ -119,15 +75,6 @@ h1 svg {
   justify-items: center;
   margin-bottom: 50px;
   padding: 0 20px;
-}
-
-.heading h1 {
-  display: flex;
-  align-items: center;
-}
-
-.heading p {
-  color: #828282;
 }
 
 section.heading {
@@ -198,37 +145,6 @@ section.heading {
 
 .btn:hover {
   transform: scale(0.98);
-}
-
-.loadingSpinnerContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loadingSpinner {
-  width: 64px;
-  height: 64px;
-  border: 8px solid;
-  border-color: #000 transparent #555 transparent;
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .hero-banner {

@@ -1,6 +1,8 @@
 function CollectionOverview() {
   return (
-    <div>CollectionOverview</div>
+    <div className="collection-container">
+      
+    </div>
   )
 }
 export default CollectionOverview

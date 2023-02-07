@@ -1,0 +1,45 @@
+.header {
+    align-items: center;
+    background-color: var(--bg);
+    border-bottom: 1px solid #e6e6e6;
+    display: inline-flex;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    padding: 0 1rem;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.header ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header ul li a:hover {
+    color: #8F3737;
+}
+
+.header ul li a svg {
+    width: 27.5px;
+    height: 2.5rem;
+}
+
+.logo {
+    background-color: #8F3737;
+    font-size: 26px;
+    padding: 8px;
+}
+
+.menu-header {
+    display: flex;
+}
+
+.menu-header li {
+    border-color: #6F6A6A;
+    border-style: solid;
+    border-width: 0 0.1px;
+    font-size: 26px;
+    margin-left: 0 !important;
+    padding: 0 40px;
+}

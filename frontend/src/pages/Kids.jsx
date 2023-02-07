@@ -1,6 +1,8 @@
 function Kids() {
   return (
-    <div>Kids</div>
+    <div>
+      
+    </div>
   )
 }
 export default Kids

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { reset, login } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/spinner/Spinner'
 
 function SignIn() {
   // Create an empty form for registration

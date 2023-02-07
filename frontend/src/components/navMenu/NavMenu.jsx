@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaUserCircle, FaShoppingCart, FaRegUser } from 'react-icons/fa'
+import {  FaUserCircle, FaShoppingCart, FaRegUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout, reset } from '../../features/auth/authSlice'
@@ -37,8 +37,12 @@ function NavMenu() {
           </DropDownMenu>
         </NavItem>
         </>) : (<>
-        <NavItem icon={<FaSignInAlt />} link="/SignIn"/>
-        <NavItem icon={<FaRegUser />} link="/SignUp" />
+        <NavItem icon={<FaRegUser />} link="/">
+          <DropDownMenu>
+            <DropDownItem link='/SignUp' text='Register' />
+            <DropDownItem link='/SignIn' text='Login' />
+          </DropDownMenu>
+        </NavItem>
       </>)}
     </ul>
   )
