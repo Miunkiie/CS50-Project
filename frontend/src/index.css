@@ -52,16 +52,6 @@ h1 svg {
   margin-bottom: 5px;
 }
 
-.container {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-  width: 80%;
-}
-
 .icon-button {
   width: 25px;
   margin-left: 0.5rem;
@@ -145,11 +135,6 @@ section.heading {
 
 .btn:hover {
   transform: scale(0.98);
-}
-
-.hero-banner {
-  height: 30%;
-  width: 100%;
 }
 
 .section-heading {

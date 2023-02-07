@@ -6,8 +6,7 @@ import NavItem from '../navItems/NavItem'
 import DropDownMenu from '../dropDownMenu/DropDownMenu'
 import DropDownItem from '../dropDownMenu/DropDownItem'
 
-import './NavMenu.css'
-import '../navItems/NavItem.css'
+import './navMenu.css'
 
 function NavMenu() {
   const {user} = useSelector((state) => state.auth)

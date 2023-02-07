@@ -5,7 +5,7 @@ import SignIn from './pages/SignIn';
 import Men from './pages/Men'
 import Women from './pages/Women'
 import Kids from './pages/Kids'
-import Homepage from './pages/Homepage'
+import Homepage from './pages/homepage/Homepage'
 import Profile from './pages/Profile'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';

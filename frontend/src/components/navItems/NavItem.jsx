@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react'
 
+import './navItem.css'
+
 
 function NavItem(props) {
   const [open, setOpen] = useState(false)
