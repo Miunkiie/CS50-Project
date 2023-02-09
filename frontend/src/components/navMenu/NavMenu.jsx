@@ -36,7 +36,7 @@ function NavMenu() {
           </DropDownMenu>
         </NavItem>
         </>) : (<>
-        <NavItem icon={<FaRegUser />} link="/">
+        <NavItem icon={<FaRegUser />}>
           <DropDownMenu>
             <DropDownItem link='/SignUp' text='Register' />
             <DropDownItem link='/SignIn' text='Login' />
