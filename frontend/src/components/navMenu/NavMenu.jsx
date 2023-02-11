@@ -12,7 +12,7 @@ function NavMenu() {
   const {user} = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
+
   // Retrieves the token from the cookie
   const token = document.cookie.split('; ').filter(row => row.startsWith('token')).map(c=>c.split('=')[1])[0]
 
@@ -22,7 +22,6 @@ function NavMenu() {
 
     navigate('/')
   }
-
 
   return (
     <ul className="navbar-nav">
