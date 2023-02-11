@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { reset, login } from '../features/auth/authSlice'
 import Spinner from '../components/spinner/Spinner'
 
+import '../index.css'
+
 function SignIn() {
   // Create an empty form for registration
   const [formData, setFormData] = useState({
@@ -56,24 +58,24 @@ function SignIn() {
         <h1>
           <FaSignInAlt />Sign In
         </h1>
-          <form className='form' onSubmit={onSubmit}>
-            <div className="form-group">
-              <input type="email" className="form-control" id="email"
-              name="email" value={email} placeholder="Email"
-              onChange={onChange}/>
-            </div>
-            <div className="form-group">
-              <input type="password" className="form-control" id="password"
-              name="password" value={password} placeholder="Password"
-              onChange={onChange}/>
-            </div>
-            <div className="form-group">
-              <button type='submit' className='btn btn-block'>
-                Login
-              </button>
-            </div>
-          </form>
       </section>
+      <form className='form' onSubmit={onSubmit}>
+        <div className="form-group">
+          <input type="email" className="form-control" id="email"
+          name="email" value={email} placeholder="Email"
+          onChange={onChange}/>
+        </div>
+        <div className="form-group">
+          <input type="password" className="form-control" id="password"
+          name="password" value={password} placeholder="Password"
+          onChange={onChange}/>
+        </div>
+        <div className="form-group">
+          <button type='submit' className='btn btn-block'>
+            Login
+          </button>
+        </div>
+      </form>
     </>
   )
 }

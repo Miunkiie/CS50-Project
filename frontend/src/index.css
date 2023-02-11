@@ -67,40 +67,39 @@ h1 svg {
   padding: 0 20px;
 }
 
+.heading h1 {
+  display: flex;
+  align-items: center;
+}
+
 section.heading {
   margin-bottom: 20px;
   margin-top: 60px;
-  width: 100%;
 }
 
-.form,
-.content {
-  width: 50%;
+.form {
+  display: grid;
+  width: 35%;
   margin: 0 auto;
 }
 
 .form-group {
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
+  width: 100%;
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
   padding: 10px;
-  width: 75%;
-}
-
-.form-group label {
-  text-align: left;
-  display: block;
-  margin: 0 0 5px 3px;
 }
 
 .btn {
@@ -129,7 +128,7 @@ section.heading {
 }
 
 .btn-block {
-  width: 75%;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -149,10 +148,6 @@ section.heading {
 /*   MEDIA  */
 
 @media (min-width: 600px) {
-  .form {
-    width: 90%;
-  }
-
   .heading h1 {
     font-size: 2rem;
   }
