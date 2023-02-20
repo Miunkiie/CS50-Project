@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { reset, login } from '../features/auth/authSlice'
 import Spinner from '../components/spinner/Spinner'
 
-import '../index.css'
-
 function SignIn() {
   // Create an empty form for registration
   const [formData, setFormData] = useState({
@@ -55,7 +53,7 @@ function SignIn() {
   return (
     <>
       <section className="heading">
-        <h1>
+        <h1 className="form-heading">
           <FaSignInAlt />Sign In
         </h1>
       </section>
