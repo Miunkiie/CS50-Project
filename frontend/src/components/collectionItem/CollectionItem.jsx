@@ -1,16 +1,20 @@
 import './collectionItem.css'
 
-function CollectionItem({item, alt}) {
-  const {images, description, price} = item
+import placeholder from '../../assets/images/placeholder.jpg'
+
+function CollectionItem({item, href}) {
+  const { image, name, price } = item
   return (
     <div className="collection-item">
+      <a href={href}>
         <div className="item-image">
-            <img src={images} alt={alt} />
-            <div className="item-footer">
-              <h3>{description}</h3>
-              <h4>{price}</h4>
-            </div>
+            <img src={placeholder} alt={name} />
         </div>
+        <div className="item-footer">
+          <h3>{name}</h3>
+          <h4>${price}</h4>
+        </div>
+      </a>
     </div>
   )
 }
