@@ -9,8 +9,17 @@ const newArrivals = async (newArrivals) => {
     return response.data
 }
 
+// Get products
+const getProducts = async (gender) => {
+    const response = await axios.get(API_URL + `collections/${gender}`, gender)
+
+    return response.data
+}
+
+
 const productService = {
     newArrivals,
+    getProducts
 }
 
 export default productService

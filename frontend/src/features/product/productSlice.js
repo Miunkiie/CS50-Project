@@ -17,7 +17,7 @@ export const newArrivals = createAsyncThunk('product/newArrivals', async (newArr
             id: item._id,
             description: item.description,
             image: item.images[0]
-    }))
+        }))
 
     } catch(error) {
         const message = (error.response && error.response.data && 
@@ -27,6 +27,25 @@ export const newArrivals = createAsyncThunk('product/newArrivals', async (newArr
     }
 })
 
+// Retrieve products
+export const getProducts = createAsyncThunk('product/getProducts', async (gender, thunkAPI) => {
+    try {
+        const products = await productService.getProducts(gender)
+        return products.map(item => ({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            rating: item.rating,
+            image: item.images[0]
+        }))
+
+    } catch (error) {
+        const message = (error.response && error.response.data && 
+        error.response.data.message) || error.message || error.toString()
+        
+        return thunkAPI.rejectWithValue(message)
+    }
+})
 
 export const productSlice = createSlice({
     name: 'product',
@@ -43,6 +62,20 @@ export const productSlice = createSlice({
 
         })
         .addCase(newArrivals.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+            state.product = null
+        })
+                    .addCase(getProducts.pending, state => {
+            state.isLoading = true
+        })
+        .addCase(getProducts.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.product = action.payload
+
+        })
+        .addCase(getProducts.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
