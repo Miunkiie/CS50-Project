@@ -5,7 +5,7 @@ function CarouselItem({item}) {
 
   return (
     <a href="">
-        <img src={image} alt={description} />
+        <img src={placeholder} alt={description} />
     </a>
 
   )

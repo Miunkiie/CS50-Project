@@ -12,7 +12,7 @@ function Header() {
         <div>
             <ul className='menu-header'>
                 <li>
-                    <Link to="/Men">Men</Link>
+                    <Link to="/collections/men">Men</Link>
                 </li>
                 <li>
                     <Link to='/Women'>Women</Link>

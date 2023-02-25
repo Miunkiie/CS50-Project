@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header/Header'
+import Header from './components/header/Header'
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Men from './pages/Men'
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SignIn' element={<SignIn />} />
-          <Route path='/Men' element={<Men />} />
+          <Route path='/collections/:gender' element={<Men />} />
           <Route path='/Women' element={<Women />} />
           <Route path='/Kids' element={<Kids />} />
           <Route path='/' element={<Homepage />} />
