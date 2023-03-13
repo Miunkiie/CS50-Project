@@ -15,10 +15,7 @@ function Header() {
                     <Link to="/collections/men">Men</Link>
                 </li>
                 <li>
-                    <Link to='/Women'>Women</Link>
-                </li>
-                <li>
-                    <Link to='/Kids'>Kids</Link>
+                    <Link to='/collections/women'>Women</Link>
                 </li>
             </ul>
         </div>

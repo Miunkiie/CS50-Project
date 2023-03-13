@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import "./DropDownMenu.css"
 
 function DropDownItem({link, text, onClick}) {
   return (

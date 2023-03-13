@@ -6,7 +6,7 @@ import categories from '../../assets/categories/categories'
 
 import { getProducts } from "../../features/product/productSlice"
 import CollectionItem from "../../components/collectionItem/CollectionItem"
-import Sidebar from "../../components/siderbar/Sidebar"
+import Sidebar from "../sidebar/Sidebar"
 import CollapsibleBar from "../../components/collapsibleBar/CollapsibleBar"
 
 import './CollectionOverview.css'
