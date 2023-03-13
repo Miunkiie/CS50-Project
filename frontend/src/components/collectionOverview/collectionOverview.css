@@ -1,4 +1,15 @@
 .collection-container {
-    width: 100%;
-    display: inline-flex;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.collection-container .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-grid {
+    margin-left: auto;
+    width: 90%;
 }
