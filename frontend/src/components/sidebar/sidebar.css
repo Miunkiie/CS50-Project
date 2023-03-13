@@ -1,0 +1,10 @@
+.sidebar {
+    background-color: #f7f7f7;
+    float: left;
+    width: 10%;
+}
+
+.sidebar h2 {
+    margin-left: 5px;
+    font-family: var(--heading-font);
+}
