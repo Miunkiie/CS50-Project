@@ -12,7 +12,6 @@ function NavItem(props) {
   // Function for handleOutsideClicks
   const handleOutsideClicks = (e) => {
     if (open && dropDownRef.current && !dropDownRef.current.contains(e.target)) {
-      console.log('clicked outside')
       setOpen(false)
     }
   }
