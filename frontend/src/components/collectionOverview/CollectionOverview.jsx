@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import categories from '../../assets/categories/categories'
 
@@ -12,19 +12,23 @@ import CollapsibleBar from "../../components/collapsibleBar/CollapsibleBar"
 import './CollectionOverview.css'
 
 function CollectionOverview() {
-  // Retrieves the gender param
-  const {gender} = useParams();
-
   const { product, isError, message } = useSelector(state => state.product)
   const dispatch = useDispatch()
 
+  // Retrieve path params to each collectionOverview
+  const {gender, category} = useParams();
+  const [filters, setFilters] = useState({
+    gender: gender,
+    category: category
+  })
+
   useEffect(() => {
-    dispatch(getProducts(gender))
+    dispatch(getProducts(filters))
     
     if (isError) {
       toast.error(message)
     }
-  }, [dispatch, isError, message, gender])
+  }, [dispatch, isError, message, filters])
 
   // Renders all products from that category
   const renderedCollection = product.map(item =>
