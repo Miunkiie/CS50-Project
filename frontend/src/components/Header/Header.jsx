@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import NavMenu from '../navMenu/NavMenu.jsx'
 
 import './header.css'
@@ -12,10 +12,10 @@ function Header() {
         <div>
             <ul className='menu-header'>
                 <li>
-                    <Link to="/collections/men">Men</Link>
+                    <Link reloadDocument to="/collections/men">Men</Link>
                 </li>
                 <li>
-                    <Link to='/collections/women'>Women</Link>
+                    <Link reloadDocument to='/collections/women'>Women</Link>
                 </li>
             </ul>
         </div>
