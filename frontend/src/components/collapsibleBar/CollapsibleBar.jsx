@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState, useRef } from 'react'
 
 import { SlArrowDown } from 'react-icons/sl'
@@ -7,19 +7,14 @@ import './CollapsibleBar.css'
 
 function CollapsibleBar({categories, subCategory}) {
   const [open, setOpen] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [query, setQuery] = useState(searchParams.get("query"))
+  const {gender} = useParams()
 
   const toggle = useRef(null)    
 
-  const onClick = (e) => {
-    setSearchParams({query})
-  }
-
-
-  const items = subCategory.map(item => 
-    <Link onClick={setQuery} key={item} value={item}>
-      {item}
+  const category = subCategory.map(category => 
+    <Link to={`/collections/${gender}/${category.toLowerCase()}`}
+      reloadDocument key={category} value={category}>
+      {category}
     </Link>
   )
   
@@ -29,7 +24,7 @@ function CollapsibleBar({categories, subCategory}) {
           {categories}
           <SlArrowDown />
         </button>
-        {open && items}
+        {open && category}
     </div>
   )
 }
