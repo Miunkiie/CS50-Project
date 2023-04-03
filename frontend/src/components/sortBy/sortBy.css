@@ -1,0 +1,37 @@
+.sort-by-bar {
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    font-size: 18px;
+    height: 40px;
+    margin-left: auto;
+    width: 120px;
+    position: relative;
+}
+
+.sort-by-bar svg {
+    margin-left: auto;
+}
+
+.sort-by-bar ul {
+    background-color: white;
+    border: 1px solid rgb(134, 134, 134);
+    font-size: 16px;
+    position: absolute;
+    top: 40px;
+    transform: translateX(-27%);
+    z-index: 1;
+    width: 160px;
+}
+
+.sort-by-bar ul li {
+    margin: 5px 5px;
+}
+
+.sort-by-bar ul li a {
+    color: black;
+}
+
+.sort-by-bar ul :hover {
+    color: #ce6962;
+}

@@ -7,6 +7,7 @@ router.route('/').get(getHomepage)
 router.route('/products').post(protect, admin, createProduct)
 router.route('/products/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct)
 router.route('/products/:id/reviews').post(protect, createReview)
+router.route('/collections/search').get(getProducts)
 router.route('/collections/:gender/:category?').get(getProducts)
 
 
