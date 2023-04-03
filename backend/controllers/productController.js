@@ -22,7 +22,7 @@ const getHomepage = asyncHandler (async (req,res) => {
 // @Route GET /api/collections/:gender
 // @access Public
 const getProducts = asyncHandler (async (req, res) => {
-    const {colors, keyword, sortBy} = req.query
+    const {colors, q, sort} = req.query
     const {gender, category} = req.params
     let sortItems;
 
@@ -31,8 +31,8 @@ const getProducts = asyncHandler (async (req, res) => {
         $match: {
             $and: [
                 gender ? {gender: gender} : {},
-                keyword ? {name: {
-                    $regex: keyword,
+                q ? {name: {
+                    $regex: q,
                     $options: 'im'
                 }} : {},
                 colors ? {colors: colors} : {},
@@ -42,8 +42,8 @@ const getProducts = asyncHandler (async (req, res) => {
     }]
 
     // Returns the products based on the sorting chosen
-    if (sortBy){
-        switch (sortBy) {
+    if (sort){
+        switch (sort) {
             case 'priceAsc':
                 sortItems = {"price": 1}
                 break;
