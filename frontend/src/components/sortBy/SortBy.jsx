@@ -1,45 +1,31 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link, useSearchParams} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
-import { getProducts } from "../../features/product/productSlice"
-
+import { useSearchParams} from 'react-router-dom'
 
 import { SlArrowDown } from 'react-icons/sl'
 import "./sortBy.css"
 
-function SortBy({gender, category}) {
+function SortBy({setSort}) {
   const [open, setOpen] = useState(false)
-  const [searchParams] = useSearchParams()
   const dropDownRef = useRef(null)
-  
+  const [searchParams, setSearchParams] = useSearchParams()
   const sort = searchParams.get("sort")
-  
-  const {product, isError, message } = useSelector(state => state.product)
-  const dispatch = useDispatch()
-  let filters = {
-    gender, 
-    category, 
-    sort
-  }
 
   useEffect(() => {
-    dispatch(getProducts(filters))
-    
-    if (isError) {
-      toast.error(message)
-    }
-  }, [dispatch, isError, message, filters])
-
-
+      setSort(sort)
+  }, [setSort, sort])
+  
   const onClick = () => {
     setOpen(!open)
   }
-
+  
   const outsideClicks = (e) => {
     if (open && dropDownRef.current && !dropDownRef.current.contains(e.target)) {
       setOpen(false)
     }
+  }
+
+  const setSortUrl = (e) => {
+    setSearchParams({"sort": e.target.dataset.sort})
   }
 
   document.addEventListener("click", outsideClicks)
@@ -47,29 +33,22 @@ function SortBy({gender, category}) {
   return (
     <div className="sort-by-bar" onClick={onClick} ref={dropDownRef}>
       Sort by 
-      < SlArrowDown />
-      {open && <ul>
-        <li>
-          <Link to={{
-            pathname: `/collections/${gender}`,
-            search: "?sort=priceDesc"
-          }}
-          >
+      <SlArrowDown />
+      {open && <ul onClick={setSortUrl}>
+        <li data-sort="priceDesc">
           Price: High-Low
-          </Link>
         </li>
-        <li>
-          <Link to={{
-            pathname: `/collections/${gender}`,
-            search: "?sort=priceAsc"
-          }}
-          >
+        <li data-sort="priceAsc">
           Price: Low-High
-          </Link>
         </li>
-        <li data-sort="ratingDesc">Rating: High-Low</li>
-        <li data-sort="ratingAsc">Rating: Low-High</li>
-      </ul> }
+        <li data-sort="ratingDesc">
+          Rating: High-Low
+        </li>
+        <li data-sort="ratingAsc">
+          Rating: Low-High
+        </li>
+      </ul>
+      }
     </div>
   )
 }

@@ -25,10 +25,9 @@
 }
 
 .sort-by-bar ul li {
+    display: list-item;
+    line-height: 2.4;
     margin: 5px 5px;
-}
-
-.sort-by-bar ul li a {
     color: black;
 }
 
