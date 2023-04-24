@@ -4,7 +4,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Homepage from './pages/homepage/Homepage'
 import Profile from './pages/Profile'
-import CollectionOverview from './components/collectionOverview/CollectionOverview'
+import Collections from './pages/collections/Collections';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,8 +16,8 @@ function App() {
         <Routes>
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SignIn' element={<SignIn />} />
-          <Route path='/collections/:gender' element={<CollectionOverview />}>
-            <Route path='/collections/:gender/:category' element={<CollectionOverview />} />
+          <Route path='/collections/:gender' element={<Collections />}>
+            <Route path='/collections/:gender/:category' element={<Collections />} />
           </Route>
           <Route path='/' element={<Homepage />} />
           <Route path='/Profile' element={<Profile />} />
