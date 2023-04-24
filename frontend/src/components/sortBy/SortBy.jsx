@@ -17,7 +17,7 @@ function SortBy({setSort}) {
   const onClick = () => {
     setOpen(!open)
   }
-  
+
   const outsideClicks = (e) => {
     if (open && dropDownRef.current && !dropDownRef.current.contains(e.target)) {
       setOpen(false)
