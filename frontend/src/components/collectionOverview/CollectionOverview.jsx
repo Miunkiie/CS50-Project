@@ -1,26 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import categories from '../../assets/categories/categories'
 
 import { getProducts } from "../../features/product/productSlice"
 import CollectionItem from "../../components/collectionItem/CollectionItem"
 import Sidebar from "../sidebar/Sidebar"
+import SortBy from '../sortBy/SortBy'
 import CollapsibleBar from "../../components/collapsibleBar/CollapsibleBar"
 
-import './CollectionOverview.css'
+import './collectionOverview.css'
 
-function CollectionOverview() {
+function CollectionOverview({filters, setFilters, categories, title}) {
   const { product, isError, message } = useSelector(state => state.product)
+  const { pathname } = useLocation()
+
   const dispatch = useDispatch()
 
-  // Retrieve path params to each collectionOverview
-  const {gender, category} = useParams();
-  const [filters, setFilters] = useState({
-    gender: gender,
-    category: category
-  })
+  const setSort = useCallback((sort) => {
+    setFilters(prevState => ({
+      ...prevState,
+      sort: sort
+    }))
+  }, [setFilters])
 
   useEffect(() => {
     dispatch(getProducts(filters))
@@ -28,7 +30,7 @@ function CollectionOverview() {
     if (isError) {
       toast.error(message)
     }
-  }, [dispatch, isError, message, filters])
+  }, [dispatch, isError, message, setFilters, pathname])
 
   // Renders all products from that category
   const renderedCollection = product.map(item =>
@@ -36,7 +38,7 @@ function CollectionOverview() {
   )
   
   // Renders item types specific to the gender
-  const renderedCategories = Object.entries(categories[gender]).map(([key, value]) => 
+  const renderedCategories = categories.map(([key, value]) => 
     <CollapsibleBar key={key} categories={key} subCategory={value} />
   )
 
@@ -44,9 +46,10 @@ function CollectionOverview() {
     <div className="collection-container">
       <section className="heading">
         <h1>
-          {gender}
+          {title}
         </h1>
       </section>
+      <SortBy setSort={setSort} />
       <Sidebar>
         {renderedCategories}
       </Sidebar>

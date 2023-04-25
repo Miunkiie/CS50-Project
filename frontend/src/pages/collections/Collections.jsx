@@ -20,6 +20,5 @@ function Collections() {
     filters={filters} categories={categoryMap} title={gender} />
   )
 }
-export
 
-default Collections
+export default Collections
