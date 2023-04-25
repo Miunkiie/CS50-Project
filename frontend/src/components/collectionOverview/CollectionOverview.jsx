@@ -17,7 +17,7 @@ function CollectionOverview({filters, setFilters, categories, title}) {
 
   const dispatch = useDispatch()
 
-  const setSort = useCallback((sort) => {
+  const setSort = useCallback(sort => {
     setFilters(prevState => ({
       ...prevState,
       sort: sort
@@ -30,16 +30,16 @@ function CollectionOverview({filters, setFilters, categories, title}) {
     if (isError) {
       toast.error(message)
     }
-  }, [dispatch, isError, message, setFilters, pathname])
+  }, [dispatch, isError, message, filters])
 
   // Renders all products from that category
   const renderedCollection = product.map(item =>
     <CollectionItem key={item.id} item={item} href="" />
   )
   
-  // Renders item types specific to the gender
+  // Renders categories
   const renderedCategories = categories.map(([key, value]) => 
-    <CollapsibleBar key={key} categories={key} subCategory={value} />
+    <CollapsibleBar key={key} categories={key} subCategory={value} setCategory={setFilters} />
   )
 
   return (
