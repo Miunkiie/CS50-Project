@@ -11,13 +11,17 @@ const newArrivals = async (newArrivals) => {
 
 // Get products
 const getProducts = async (filters) => {
-    const {gender, category} = filters
+    const {gender, category, sort} = filters
     let response;
 
     if (category) {
-        response = await axios.get(API_URL + `collections/${gender}/${category}`, gender, category)
+        response = await axios.get(API_URL + `collections/${gender}/${category}`, {
+            params: { sort }
+        })
     } else {
-        response = await axios.get(API_URL + `collections/${gender}`, gender)
+        response = await axios.get(API_URL + `collections/${gender}`, {
+            params: { sort }
+        })
     }
 
     return response.data
