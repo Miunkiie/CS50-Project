@@ -10,11 +10,9 @@
 }
 
 .item-grid {
-    background-color: white;
     display: grid;
     gap: 1px;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-around;
-    margin-left: auto;
     width: 90%;
 }

@@ -11,7 +11,6 @@ import Banner from "../../components/banner/Banner"
 
 import './homepage.css'
 
-
 function Homepage() {
   const dispatch = useDispatch()
   const { product, isError, message } = useSelector(state => state.product)

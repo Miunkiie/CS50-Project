@@ -1,7 +1,7 @@
 .collection-item {
     background-color: #f7f7f7;
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 20vw;
     position: relative;

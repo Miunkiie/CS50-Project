@@ -2,9 +2,11 @@ import {  FaUserCircle, FaShoppingCart, FaRegUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout, reset } from '../../features/auth/authSlice'
+
 import NavItem from '../navItems/NavItem'
 import DropDownMenu from '../dropDownMenu/DropDownMenu'
 import DropDownItem from '../dropDownMenu/DropDownItem'
+import SearchBar from '../searchBar/SearchBar.jsx'
 
 import './navMenu.css'
 
@@ -25,6 +27,7 @@ function NavMenu() {
 
   return (
     <ul className="navbar-nav">
+        <SearchBar />
         <NavItem icon={<FaShoppingCart />} link="/cart" />
       {/* Displays logout if there user is logged in */}
       {user ? (<>
