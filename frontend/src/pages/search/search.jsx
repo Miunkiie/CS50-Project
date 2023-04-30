@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
+import { useState } from 'react'
 
 import categories from "../../assets/categories/categories"
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
@@ -6,17 +7,15 @@ import CollectionOverview from "../../components/collectionOverview/CollectionOv
 function Search() {
   const [ searchParams, setSearchParams ] = useSearchParams()
   const query = searchParams.get("q")
+  const [ filters, setFilters ] = useState({
+    q: query
+  })
 
-  
   // Combined categories both genders 
   const combinedCategories = Object.entries({...categories["men"], ...categories["women"]})
-
-  const filters = {
-    q: query
-  }
   
   return (
-    <CollectionOverview categories={combinedCategories} filters={filters} />
+    <CollectionOverview categories={combinedCategories} filters={filters} setFilters={setFilters} />
   )
 }
 export default Search
