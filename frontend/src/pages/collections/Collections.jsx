@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
+import SideBarLink from '../../components/sideBarLink/SideBarLink'
 import categories from '../../assets/categories/categories'
 
 function Collections() {
@@ -12,12 +13,15 @@ function Collections() {
     gender: gender || "",
     category: category || "",
   })
-
-  const categoryMap = Object.entries(categories[gender])
+  
+  // Renders categories
+  const renderedCategories = Object.entries(categories[gender]).map(([key, value]) => 
+      <SideBarLink key={key} category={key} subCategory={value} setCategory={setFilters} />
+  )
 
   return (
     <CollectionOverview filters={filters} setFilters={setFilters} 
-    categories={categoryMap} title={gender} />
+    categories={renderedCategories} title={gender} />
   )
 }
 
