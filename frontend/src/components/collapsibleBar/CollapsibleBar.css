@@ -4,31 +4,3 @@
     margin-left: 5px;
     margin-bottom: 10px;
 }
-
-.collapsible-bar button {
-    background-color: inherit;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: flex-start;
-    font-size: 20px;
-    width: 100%;
-}
-
-.collapsible-bar button svg {
-    font-size: 18px;
-    margin-left: auto;
-    margin-right: 5px;
-}
-
-.collapsible-bar a {
-    font-size: 1.1rem;
-    color: black;
-    list-style-type: none;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.active {
-    font-weight: 750;
-}
