@@ -5,7 +5,7 @@ import categories from "../../assets/categories/categories"
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
 
 function Search() {
-  const [ searchParams, setSearchParams ] = useSearchParams()
+  const [ searchParams ] = useSearchParams()
   const query = searchParams.get("q")
   const [ filters, setFilters ] = useState({
     q: query
@@ -15,7 +15,8 @@ function Search() {
   const combinedCategories = Object.entries({...categories["men"], ...categories["women"]})
   
   return (
-    <CollectionOverview categories={combinedCategories} filters={filters} setFilters={setFilters} />
+    <CollectionOverview categories={combinedCategories} 
+    filters={filters} setFilters={setFilters} />
   )
 }
 export default Search

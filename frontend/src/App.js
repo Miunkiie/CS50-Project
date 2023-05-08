@@ -21,7 +21,7 @@ function App() {
           <Route path='/collections/:gender' element={<Collections />}>
             <Route path='/collections/:gender/:category' element={<Collections />} />
           </Route>
-          <Route path='/collections/search' element={<Search />} />
+          <Route path='/collections/search/' element={<Search />} />
           <Route path='/' element={<Homepage />} />
           <Route path='/Profile' element={<Profile />} />
         </Routes>

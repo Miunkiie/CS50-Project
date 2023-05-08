@@ -1,11 +1,14 @@
 import { useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
+import { getProducts } from "../../features/product/productSlice"
 
 import './searchBar.css'
 
 function SearchBar() {
   const [ searchParams, setSearchParams ] = useSearchParams()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const searchedQuery = useRef(null)
 
@@ -13,7 +16,8 @@ function SearchBar() {
   // Might have to refactor CollectionOverview into smaller components, i.e, rendered categories etc..
   const submit = e => {
     e.preventDefault()
-
+    
+    dispatch(getProducts({q: searchedQuery.current.value }))
 
     setSearchParams({"q": searchedQuery.current.value})
     
