@@ -1,6 +1,23 @@
-.collapsible-bar{
+.collapsible-bar {
     display: grid;
     background-color: #f7f7f7;
     margin-left: 5px;
     margin-bottom: 10px;
+}
+
+.collapsible-bar button {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: flex-start;
+    font-size: 20px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.collapsible-bar button svg {
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: 5px;
 }
