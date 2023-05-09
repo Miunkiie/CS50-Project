@@ -26,6 +26,10 @@
     margin-bottom: 5px;
 }
 
+.collapsible-bar a:hover {
+    font-weight: 750;
+}
+
 .active {
     font-weight: 750;
 }
