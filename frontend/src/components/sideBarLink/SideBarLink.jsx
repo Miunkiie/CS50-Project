@@ -15,12 +15,13 @@ function SideBarLink({ category, subCategory, setCategory }) {
     }
 
     // Maps the subcategories
-    const subCategories = subCategory.map(category => 
+    const subCategories = subCategory.map(category =>
         <NavLink onClick={changeCategory} data-category={category} 
-        to={`${category.toLowerCase()}`} key={category}>
-        {category}
-    </NavLink>
+            to={`${category.toLowerCase()}`} key={category}>
+            {category}
+        </NavLink>
   )
+  
   return (
     <>
         <button onClick={() => setOpen(!open)}>
