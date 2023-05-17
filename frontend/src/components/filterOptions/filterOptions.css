@@ -1,0 +1,43 @@
+.form-control {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.1rem;
+    color: black;
+    list-style-type: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.form-control+.form-control {
+    margin-top: 1em;
+}
+
+input[type="checkbox"] {
+    display: grid;
+    place-content: center;
+    appearance: none;
+    margin: 0;    
+    font: inherit;
+    color: currentColor;
+    width: 1.10em;
+    height: 1.10em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(0.125em) translateX(0.25em);
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
