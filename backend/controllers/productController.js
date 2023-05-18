@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 // @desc Retrieves the newsest arrivals - homepage for the website
 // @Route GET /api/
 // @access Public
-const getHomepage = asyncHandler (async (req,res) => {
+const getHomepage = asyncHandler (async (req, res) => {
     // Retrieves the newest arrivals based on the time they were first created
     const newArrivals = await Products.find({}).sort('-createdAt').limit(10).exec()
     
@@ -31,7 +31,7 @@ const getProducts = asyncHandler (async (req, res) => {
         $match: {
             $and: [
                 gender ? {gender: gender} : {},
-                q ? {name: {
+                q ? {category: {
                     $regex: q,
                     $options: 'im'
                 }} : {},
