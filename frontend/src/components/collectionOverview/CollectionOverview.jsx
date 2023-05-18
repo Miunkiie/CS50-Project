@@ -10,7 +10,7 @@ import SortBy from '../sortBy/SortBy'
 
 import './collectionOverview.css'
 
-function CollectionOverview({filters, setFilters, categories, title}) {
+function CollectionOverview({filters, setFilters, categories, title, heading}) {
   const { product, isError, message } = useSelector(state => state.product)
   const dispatch = useDispatch()
 
@@ -43,7 +43,7 @@ function CollectionOverview({filters, setFilters, categories, title}) {
         </h1>
       </section>
       <SortBy setSort={setSort} />
-      <Sidebar>
+      <Sidebar heading={heading}>
         <CollapsibleBar>
           {categories}
         </CollapsibleBar>

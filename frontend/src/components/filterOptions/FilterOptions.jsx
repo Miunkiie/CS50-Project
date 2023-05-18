@@ -11,15 +11,14 @@ function FilterOptions({ setFilters, category, subCategory }) {
   const updateFilters = (e) => {
     setFilters(prevState => ({
         ...prevState,
-        [e.target.name]: e.target.value.toLowerCase()
+        category: e.target.value.toLowerCase()
     }))
   }
 
   const subCategories = subCategory.map(category =>
     <label className="form-control" key={category}> 
+      <input type="checkbox" name={category} onClick={updateFilters} value={category} />
       {category}
-      <input type="checkbox" name={category} onClick={updateFilters} 
-      to={`${category.toLowerCase()}`} />
     </label>
   )
 

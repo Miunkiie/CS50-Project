@@ -25,7 +25,8 @@ function SortBy({setSort}) {
   }
 
   const setSortUrl = (e) => {
-    setSearchParams({"sort": e.target.dataset.sort})
+    searchParams.set("sort", e.target.dataset.sort)
+    setSearchParams(searchParams)
   }
 
   document.addEventListener("click", outsideClicks)

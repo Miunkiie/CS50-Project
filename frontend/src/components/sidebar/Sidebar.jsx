@@ -1,9 +1,9 @@
 import './sidebar.css'
 
-function Sidebar({children}) {
+function Sidebar({children, heading}) {
   return (
     <div className="sidebar">
-        <h2>Categories</h2>
+        <h2>{heading}</h2>
           {children}
     </div>
   )

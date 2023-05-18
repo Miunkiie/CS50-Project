@@ -21,7 +21,7 @@ function Collections() {
 
   return (
     <CollectionOverview filters={filters} setFilters={setFilters} 
-    categories={renderedCategories} title={gender} />
+    categories={renderedCategories} title={gender} heading="Categories" />
   )
 }
 

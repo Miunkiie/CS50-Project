@@ -1,14 +1,14 @@
 import { useSearchParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import categories from "../../assets/categories/categories"
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
 import FilterOptions from '../../components/filterOptions/FilterOptions'
 
 function Search() {
-  const [ searchParams ] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const query = searchParams.get("q")
-  const [ filters, setFilters ] = useState({
+  const [filters, setFilters] = useState({
     q: query
   })
   
@@ -18,10 +18,16 @@ function Search() {
   const renderedFilters = combinedCategories.map(([key, value]) => 
       <FilterOptions key={key} category={key} subCategory={value} setFilters={setFilters} />
   )
+
+  useEffect(() => {
+    
+  }, [filters])
+
+  console.log(filters)
   
   return (
     <CollectionOverview categories={renderedFilters} 
-    filters={filters} setFilters={setFilters} />
+    filters={filters} setFilters={setFilters} heading="Filters" />
   )
 }
 export default Search

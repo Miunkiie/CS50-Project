@@ -24,7 +24,7 @@ input[type="checkbox"] {
     height: 1.10em;
     border: 0.15em solid currentColor;
     border-radius: 0.15em;
-    transform: translateY(0.125em) translateX(0.25em);
+    transform: translateY(0.05em) translateX(-0.2em);
 }
 
 input[type="checkbox"]::before {

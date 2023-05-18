@@ -26,7 +26,7 @@ const getProducts = async (filters) => {
 
     if (q) {
         response = await axios.get(API_URL + `collections/search`, {
-            params: { q }
+            params: { q, sort }
         })
     }
 
