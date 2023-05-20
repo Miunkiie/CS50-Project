@@ -22,7 +22,7 @@ const getHomepage = asyncHandler (async (req, res) => {
 // @Route GET /api/collections/:gender
 // @access Public
 const getProducts = asyncHandler (async (req, res) => {
-    const {colors, q, sort} = req.query
+    const {colors, q, sort, sizes} = req.query
     const {gender, category} = req.params
     let sortItems;
 
@@ -35,7 +35,8 @@ const getProducts = asyncHandler (async (req, res) => {
                     $regex: q,
                     $options: 'im'
                 }} : {},
-                colors ? {colors: colors} : {},
+                colors ? {colors: {$in: colors}} : {},
+                sizes ? {sizes: {$in: sizes}} : {},
                 category ? {category: category} : {},
             ]
         },
