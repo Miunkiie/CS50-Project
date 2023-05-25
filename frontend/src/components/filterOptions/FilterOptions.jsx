@@ -5,21 +5,20 @@ import './filterOptions.css'
 import { SlArrowDown } from 'react-icons/sl'
 
 
-function FilterOptions({ filter, options }) {
+function FilterOptions({ filters, setFilters, filterHeading, options }) {
   const [open, setOpen] = useState(false)
-  const [activeFilters, setActiveFilters] = useState({})
   const [searchParams, setSearchParams] = useSearchParams()
 
   // Create an array of active filters and set search params to that.
   const updateFilters = (e) => {
     const {value, checked, name} = e.target
-    const filterCategory = activeFilters[name]
+    const filterCategory = filters[name]
 
     // Check if filter is already in array or not.
     if (checked) {
       // Add the filter if it doesn't exist in the array of active filters
       if (!filterCategory) {
-        setActiveFilters(prevState => ({
+        setFilters(prevState => ({
           ...prevState,
           [name]: [value.toLowerCase()]
         }))
@@ -28,7 +27,7 @@ function FilterOptions({ filter, options }) {
       }
 
     } else {
-      // find the index of the existing array then remove it
+      // find the index of the filter from the existing array then remove it
       const index = filterCategory.indexOf(value.toLowerCase())
       if (index > -1) {
         filterCategory.splice(index, 1)
@@ -36,29 +35,29 @@ function FilterOptions({ filter, options }) {
 
       // Remove category if there are no options selected for it
       if (filterCategory.length === 0) {
-        delete activeFilters[name]
+        delete filters[name]
       }
     }
   }
 
   const filterOptions = options.map(option =>
     <label className="form-control" key={option}> 
-      <input type="checkbox" name={filter.toLowerCase()} onClick={updateFilters} value={option} />
+      <input type="checkbox" name={filterHeading.toLowerCase()} onClick={updateFilters} value={option} />
       {option}
     </label>
   )
 
   // useEffect(() => {
-  //   console.log(activeFilters)
-  // }, [activeFilters, updateFilters])
+  //   console.log(activeFilters['colors'])
+  // }, [activeFilters])
 
   return (
     <>
       <button onClick={() => setOpen(!open)}>
-        {filter}
+        {filterHeading}
       <SlArrowDown />
       </button>
-      { open && filterOptions }
+      {filterOptions}
     </>
   )
 }
