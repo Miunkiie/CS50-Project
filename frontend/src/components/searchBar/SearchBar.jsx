@@ -17,7 +17,7 @@ function SearchBar() {
   const submit = e => {
     e.preventDefault()
     
-    dispatch(getProducts({q: searchedQuery.current.value}))
+    dispatch(getProducts({q: searchedQuery.current.value || {}}))
 
     setSearchParams({"q": searchedQuery.current.value})
     
