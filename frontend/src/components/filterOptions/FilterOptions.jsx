@@ -1,43 +1,42 @@
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useState } from 'react'
 
 import './filterOptions.css'
 import { SlArrowDown } from 'react-icons/sl'
 
-
 function FilterOptions({ filters, setFilters, filterHeading, options }) {
   const [open, setOpen] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
 
   // Create an array of active filters and set search params to that.
   const updateFilters = (e) => {
     const {value, checked, name} = e.target
-    const filterCategory = filters[name]
+    const selectedFilter = filters[name]
 
     // Check if filter is already in array or not.
     if (checked) {
       // Add the filter if it doesn't exist in the array of active filters
-      if (!filterCategory) {
+      if (!selectedFilter) {
         setFilters(prevState => ({
           ...prevState,
           [name]: [value.toLowerCase()]
         }))
+
       } else {
-        filterCategory.push(value.toLowerCase())
+        setFilters(prevState => ({
+          ...prevState,
+          [name]: [...prevState[name], value.toLowerCase()]
+        }))
       }
 
     } else {
-      // find the index of the filter from the existing array then remove it
-      const index = filterCategory.indexOf(value.toLowerCase())
+      // find the index of the filter from the existing array filter it out - cannot MUTATE STATE
+      const index = selectedFilter.indexOf(value.toLowerCase())
       if (index > -1) {
-        filterCategory.splice(index, 1)
+        setFilters(prevState => ({
+          ...prevState,
+          [name]: prevState[name].filter((_, i) => i !== index)
+        }))
       }
-
-      // Remove category if there are no options selected for it
-      if (filterCategory.length === 0) {
-        delete filters[name]
-      }
-    }
+    }  
   }
 
   const filterOptions = options.map(option =>
@@ -46,10 +45,6 @@ function FilterOptions({ filters, setFilters, filterHeading, options }) {
       {option}
     </label>
   )
-
-  // useEffect(() => {
-  //   console.log(activeFilters['colors'])
-  // }, [activeFilters])
 
   return (
     <>
