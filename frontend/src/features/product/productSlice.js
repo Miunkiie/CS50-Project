@@ -31,6 +31,7 @@ export const newArrivals = createAsyncThunk('product/newArrivals', async (newArr
 export const getProducts = createAsyncThunk('product/getProducts', async (filters, thunkAPI) => {
     try {
         const products = await productService.getProducts(filters)
+        
         return products.map(item => ({
             id: item._id,
             name: item.name,

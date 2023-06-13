@@ -1,8 +1,4 @@
 const filterOptions = {
-    Gender: [
-        "Men",
-        "Women"
-    ],
     Colors: [
         "Black",
         "Grey",
