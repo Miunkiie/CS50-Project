@@ -19,7 +19,7 @@ function CollectionOverview({setFilters, categories, title, heading}) {
   const setSort = useCallback(sort => {
     setFilters(prevState => ({
       ...prevState,
-      sort: sort
+      sort: sort || ""
     }))
   }, [setFilters])
 
