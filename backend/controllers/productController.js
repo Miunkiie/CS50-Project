@@ -25,7 +25,7 @@ const getProducts = asyncHandler (async (req, res) => {
     const {colors, q, sort, sizes} = req.query
     const {gender, category} = req.params
     let sortItems;
-
+    
     // Saves all the filtered options
     let filters = [{
         $match: {
