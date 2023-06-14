@@ -26,15 +26,21 @@ function FilterOptions({ filters, setFilters, filterHeading, options }) {
           [name]: [...prevState[name], value.toLowerCase()]
         }))
       }
-
     } else {
       // find the index of the filter from the existing array filter it out - cannot MUTATE STATE
       const index = selectedFilter.indexOf(value.toLowerCase())
       if (index > -1) {
-        setFilters(prevState => ({
-          ...prevState,
-          [name]: prevState[name].filter((_, i) => i !== index)
-        }))
+        // If last filter, remove the whole category from filter
+        if (selectedFilter.length === 1) {
+          const {[name]: tmp, ...currentFilters} = filters
+          setFilters(currentFilters)
+
+        } else {
+          setFilters(prevState => ({
+            ...prevState,
+            [name]: prevState[name].filter((_, i) => i !== index)
+          }))
+        }
       }
     }  
   }
