@@ -1,18 +1,13 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useSearchParams} from 'react-router-dom'
 
 import { SlArrowDown } from 'react-icons/sl'
 import "./sortBy.css"
 
-function SortBy({setSort}) {
+function SortBy({setFilters}) {
   const [open, setOpen] = useState(false)
   const dropDownRef = useRef(null)
   const [searchParams, setSearchParams] = useSearchParams()
-  const sort = searchParams.get("sort")
-
-  useEffect(() => {
-      setSort(sort)
-  }, [setSort, sort])
   
   const onClick = () => {
     setOpen(!open)
@@ -24,7 +19,12 @@ function SortBy({setSort}) {
     }
   }
 
-  const setSortUrl = (e) => {
+  const setSort = (e) => {
+    setFilters(prevState => ({
+      ...prevState,
+      sort: e.target.dataset.sort
+    }))
+
     searchParams.set("sort", e.target.dataset.sort)
     setSearchParams(searchParams)
   }
@@ -35,7 +35,7 @@ function SortBy({setSort}) {
     <div className="sort-by-bar" onClick={onClick} ref={dropDownRef}>
       Sort by 
       <SlArrowDown />
-      {open && <ul onClick={setSortUrl}>
+      {open && <ul onClick={setSort}>
         <li data-sort="priceDesc">
           Price: High-Low
         </li>

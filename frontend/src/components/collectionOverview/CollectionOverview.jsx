@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { useCallback } from 'react'
 
 import CollectionItem from "../../components/collectionItem/CollectionItem"
 import CollapsibleBar from '../collapsibleBar/CollapsibleBar'
@@ -16,13 +15,6 @@ function CollectionOverview({setFilters, categories, title, heading}) {
     <CollectionItem key={item.id} item={item} href="" />
   )
 
-  const setSort = useCallback(sort => {
-    setFilters(prevState => ({
-      ...prevState,
-      sort: sort || ""
-    }))
-  }, [setFilters])
-
   return (
     <div className="collection-container">
       <section className="heading">
@@ -30,7 +22,7 @@ function CollectionOverview({setFilters, categories, title, heading}) {
           {title}
         </h1>
       </section>
-      <SortBy setSort={setSort} />
+      <SortBy setFilters={setFilters} />
       <Sidebar heading={heading}>
         <CollapsibleBar>
           {categories}
