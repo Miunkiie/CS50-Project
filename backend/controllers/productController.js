@@ -30,13 +30,13 @@ const getProducts = asyncHandler (async (req, res) => {
     let filters = [{
         $match: {
             $and: [
-                gender ? {gender: {$in: [gender]}} : {},
+                gender ? {gender: {$in: gender}} : {},
                 q ? {category: {
                     $regex: q,
                     $options: 'im'
                 }} : {},
-                colors ? {colors: {$in: [colors]}} : {},
-                sizes ? {sizes: {$in: [sizes]}} : {},
+                colors ? {colors: {$in: colors}} : {},
+                sizes ? {sizes: {$in: sizes}} : {},
                 category ? {category: category} : {},
             ]
         },
