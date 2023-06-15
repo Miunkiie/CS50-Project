@@ -25,12 +25,12 @@ const getProducts = asyncHandler (async (req, res) => {
     const {colors, q, sort, sizes} = req.query
     const {gender, category} = req.params
     let sortItems;
-    
+
     // Saves all the filtered options
     let filters = [{
         $match: {
             $and: [
-                gender ? {gender: {$in: gender}} : {},
+                gender ? {gender: {$in: [gender]}} : {},
                 q ? {category: {
                     $regex: q,
                     $options: 'im'

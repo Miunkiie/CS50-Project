@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux' 
 
 import CollectionItem from "../../components/collectionItem/CollectionItem"
 import CollapsibleBar from '../collapsibleBar/CollapsibleBar'

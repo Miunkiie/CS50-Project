@@ -16,15 +16,19 @@ function SearchBar() {
   // Might have to refactor CollectionOverview into smaller components, i.e, rendered categories etc..
   const submit = e => {
     e.preventDefault()
-    
-    dispatch(getProducts({q: searchedQuery.current.value || {}}))
 
-    setSearchParams({"q": searchedQuery.current.value})
+    const query = searchedQuery.current.value
+    
+    dispatch(getProducts({q: query || {}}))
+
+    setSearchParams({"q": query})
     
     navigate({
       pathname: "collections/search",
       search: `q=${searchedQuery.current.value}`
     })
+
+    window.location.reload()
   }
 
   return (

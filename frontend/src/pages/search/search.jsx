@@ -26,25 +26,13 @@ function Search() {
     filters={filters} />
   )
 
-    // Creates a new object for the updated filters
-    // If we update filters, it'll create an infinite loop
-    let updatedFilters = {}
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value.length > 0) {
-        updatedFilters[key] = value;
-      }   
-    })
-
   useEffect(() => {
+    dispatch(getProducts(filters))
+
     if (isError) {
       toast.error(message)
     }
-  }, [isError, message])
-  
-  // Dispatch Filter
-  useEffect(() => {
-    dispatch(getProducts(updatedFilters))
-  }, [dispatch, filters])
+  }, [isError, message, dispatch, filters])
 
   return (
     <CollectionOverview categories={renderedFilters} 
