@@ -24,6 +24,15 @@ function Homepage() {
 
   }, [dispatch, isError, message])
 
+  // Settings for the carousel
+  const settings = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  }
+
   const renderedCarousel = product.map(item => 
   <CarouselItem key={item.id} item={item} />)
 
@@ -42,7 +51,7 @@ function Homepage() {
             <RxDividerHorizontal className="section-divider"/>
           </h2>
         </section>
-        <Carousel>
+        <Carousel settings={settings}>
           {renderedCarousel}
         </Carousel>
       </div>

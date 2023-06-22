@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 // @access Public
 const getHomepage = asyncHandler (async (req, res) => {
     // Retrieves the newest arrivals based on the time they were first created
-    const newArrivals = await Products.find({}).sort('-createdAt').limit(10).exec()
+    const newArrivals = await Products.find({}).sort('-createdAt').limit(8).exec()
     
     if (!newArrivals) {
         res.status(500)
