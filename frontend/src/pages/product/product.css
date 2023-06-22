@@ -1,0 +1,41 @@
+.product-container {
+    position: relative;
+    margin:  14px auto;
+    width: 80%;
+}
+
+.content-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+
+.product-image-section {
+    display: flex;
+    justify-content: space-between;
+    height: 575px;
+    width: 50%;
+    margin-bottom: 40px;
+}
+
+.thumbnail-section {
+    align-items: flex-start;
+    display: flex;
+    margin-right: 20px;
+    width: 15%;
+}
+
+.slick-slide div {
+    display: flex;
+    justify-content: center;
+}
+
+.slick-slide img {
+    object-fit: cover;
+    height: 100px;
+}
+
+.info-container {
+    width: 40%
+}
