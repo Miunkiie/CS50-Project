@@ -25,17 +25,17 @@
     margin-right: 20px;
     width: 15%;
 }
-
-.slick-slide div {
+  
+.thumbnail-section .slick-slide div {
     display: flex;
     justify-content: center;
 }
 
-.slick-slide img {
+.thumbnail-section .slick-slide img {
     object-fit: cover;
     height: 100px;
 }
 
-.info-container {
+.thumbnail-section .info-container {
     width: 40%
 }
