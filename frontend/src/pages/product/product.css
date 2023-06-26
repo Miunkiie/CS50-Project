@@ -22,7 +22,7 @@
 .thumbnail-section {
     align-items: flex-start;
     display: flex;
-    margin-right: 20px;
+    margin-right: 25px;
     width: 15%;
 }
   
@@ -32,10 +32,22 @@
 }
 
 .thumbnail-section .slick-slide img {
+    border-radius: 5px;
     object-fit: cover;
     height: 100px;
 }
 
 .thumbnail-section .info-container {
     width: 40%
+}
+
+.main-image {
+    width: 575px;
+    height: 100%;
+}
+
+.main-image img {
+    width: 575px;
+    height: 100%;
+    object-fit: fill;
 }

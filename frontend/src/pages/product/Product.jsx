@@ -4,19 +4,18 @@ import { newArrivals } from '../../features/product/productSlice'
 
 import Carousel from "../../components/carousel/Carousel"
 import CarouselItem from '../../components/carousel/CarouselItem'
+import Thumbnail from '../../components/thumbnail/Thumbnail'
 import './product.css'
 
 function Product() {
   const {product, isError, message} = useSelector(state => state.product)
   const dispatch = useDispatch()
 
-  console.log(product)
-
   useEffect(() => {
     dispatch(newArrivals())
   }, [dispatch])
 
-  const settings = {
+  const thumbailSettings = {
     arrows: false,
     dots: false,
     infinite: false,
@@ -27,9 +26,22 @@ function Product() {
     verticalSwiping: true,
   }
 
-  const renderedCarousel = product.map(item => 
+  const mainImageSettings = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  }
+
+  const renderedThumbnail = product.map(item => 
+    <Thumbnail role="button" key={item.id} item={item} />
+  )
+
+    const renderedCarousel = product.map(item => 
     <CarouselItem key={item.id} item={item} />
   )
+
+  // useEffect to detect when a thumbnail is clicked then transfer it to the main image
 
   return (
     <div className="product-container">
@@ -37,7 +49,12 @@ function Product() {
         <div className="content-card">
           <div className="product-image-section">
             <div className="thumbnail-section">
-              <Carousel settings={settings}>
+              <Carousel settings={thumbailSettings}>
+                {renderedThumbnail}
+              </Carousel>
+            </div>
+            <div className="main-image">
+              <Carousel settings={mainImageSettings}>
                 {renderedCarousel}
               </Carousel>
             </div>
