@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { newArrivals } from '../../features/product/productSlice'
-
 import Slider from "react-slick"
-import Thumbnail from '../../components/thumbnail/Thumbnail'
+
+import placeholder from '../../assets/images/placeholder.jpg'
 import './product.css'
 
 function Product() {
@@ -38,12 +38,8 @@ function Product() {
     asNavFor: thumbnailSlider.current
   }
 
-  const renderedThumbnail = product.map(item => 
-    <Thumbnail item={item} key={item.id} />
-  )
-
-    const renderedImage = product.map(item => 
-    <Thumbnail item={item} key={item.id} />
+  const renderedImages = product.map(item => 
+    <img src={placeholder} alt={item.description} />
   )
 
   return (
@@ -53,12 +49,12 @@ function Product() {
           <div className="product-image-section">
             <div className="thumbnail-section">
               <Slider {...thumbailSettings} ref={thumbnailSlider}>
-                {renderedThumbnail}
+                {renderedImages}
               </Slider>
             </div>
             <div className="main-image">
               <Slider {...mainImageSettings} ref={mainImageSlider}>
-                {renderedImage}
+                {renderedImages}
               </Slider>
             </div>
           </div>

@@ -34,7 +34,10 @@
 .thumbnail-section .slick-slide img {
     border-radius: 5px;
     object-fit: cover;
+    width: 100px !important;
     height: 100px;
+    border: none;
+    cursor: pointer;
 }
 
 .thumbnail-section .slick-slide img:hover {
