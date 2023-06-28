@@ -4,10 +4,10 @@ import { newArrivals } from '../../features/product/productSlice'
 import { toast } from 'react-toastify'
 
 import clearanceBanner from "../../assets/images/ClearanceBanner.png"
-import Carousel from "../../components/carousel/Carousel"
-import CarouselItem from '../../components/carousel/CarouselItem'
+import Slider from "react-slick"
 import { RxDividerHorizontal } from "react-icons/rx"
 import Banner from "../../components/banner/Banner"
+import placeholder from '../../assets/images/placeholder.jpg'
 
 import './homepage.css'
 
@@ -33,8 +33,12 @@ function Homepage() {
     swipeToSlide: true,
   }
 
-  const renderedCarousel = product.map(item => 
-  <CarouselItem key={item.id} item={item} />)
+  const renderedCarousel = product.map(item =>
+    // Replace the placeholder with image stored in AWS
+    <a href="/">
+      <img src={placeholder} alt={item.description} />
+    </a>
+  )
 
   return (
     <div>
@@ -51,9 +55,9 @@ function Homepage() {
             <RxDividerHorizontal className="section-divider"/>
           </h2>
         </section>
-        <Carousel settings={settings}>
+        <Slider {...settings}>
           {renderedCarousel}
-        </Carousel>
+        </Slider>
       </div>
     </div>
   )
