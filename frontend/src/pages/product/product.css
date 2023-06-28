@@ -37,6 +37,10 @@
     height: 100px;
 }
 
+.thumbnail-section .slick-slide img:hover {
+    opacity: 0.5;
+}
+
 .thumbnail-section .info-container {
     width: 40%
 }
@@ -51,3 +55,9 @@
     height: 100%;
     object-fit: fill;
 }
+
+[role="thumbnail"]:hover {
+    color: red;
+    z-index: 100px;
+}
+
