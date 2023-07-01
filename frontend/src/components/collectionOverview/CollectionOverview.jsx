@@ -12,7 +12,7 @@ function CollectionOverview({setFilters, categories, title, heading}) {
 
   // Renders all products from that category
   const renderedCollection = product.map(item =>
-    <CollectionItem key={item.id} item={item} href="" />
+    <CollectionItem key={item.id} item={item} href={`/product/${item.name.replace(/\s+/g, '-').toLowerCase()}`} />
   )
 
   return (

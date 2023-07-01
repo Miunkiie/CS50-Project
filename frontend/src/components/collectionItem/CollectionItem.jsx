@@ -8,7 +8,7 @@ function CollectionItem({item, href}) {
     <div className="collection-item">
       <a href={href}>
         <div className="item-image">
-            <img src={placeholder} alt={name} />
+            <img src={image} alt={name} />
         </div>
         <div className="item-footer">
           <h3>{name}</h3>

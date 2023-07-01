@@ -34,3 +34,12 @@
     color: rgb(63, 62, 62);
     font-size: 30px;
 }
+
+.homepage-carousel img {
+    width: 365px;
+    height: 400px;
+}
+
+.homepage-carousel img:hover {
+    opacity: 0.5;
+}

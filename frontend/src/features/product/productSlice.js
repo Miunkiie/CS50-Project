@@ -15,6 +15,7 @@ export const newArrivals = createAsyncThunk('product/newArrivals', async (newArr
         const product = await productService.newArrivals({})
         return product.map(item => ({
             id: item._id,
+            name: item.name,
             description: item.description,
             image: item.images[0]
         }))

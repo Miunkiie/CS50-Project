@@ -38,8 +38,8 @@ function Product() {
     asNavFor: thumbnailSlider.current
   }
 
-  const renderedImages = product.map(item => 
-    <img src={placeholder} alt={item.description} />
+  const renderedImages = product.map((item, index) => 
+    <img key={index} src={placeholder} alt={item.description} />
   )
 
   return (

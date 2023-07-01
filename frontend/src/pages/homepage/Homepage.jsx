@@ -7,7 +7,6 @@ import clearanceBanner from "../../assets/images/ClearanceBanner.png"
 import Slider from "react-slick"
 import { RxDividerHorizontal } from "react-icons/rx"
 import Banner from "../../components/banner/Banner"
-import placeholder from '../../assets/images/placeholder.jpg'
 
 import './homepage.css'
 
@@ -35,8 +34,8 @@ function Homepage() {
 
   const renderedCarousel = product.map(item =>
     // Replace the placeholder with image stored in AWS
-    <a href="/">
-      <img src={placeholder} alt={item.description} />
+    <a href={`product/${item.name.replace(/\s+/g, '-').toLowerCase()}`} key={item.id}>
+      <img src={item.image} alt={item.description} />
     </a>
   )
 
@@ -55,7 +54,7 @@ function Homepage() {
             <RxDividerHorizontal className="section-divider"/>
           </h2>
         </section>
-        <Slider {...settings}>
+        <Slider {...settings} className="homepage-carousel">
           {renderedCarousel}
         </Slider>
       </div>
