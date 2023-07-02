@@ -1,7 +1,5 @@
 import './collectionItem.css'
 
-import placeholder from '../../assets/images/placeholder.jpg'
-
 function CollectionItem({item, href}) {
   const { image, name, price } = item
   return (
