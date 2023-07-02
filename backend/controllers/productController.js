@@ -80,7 +80,7 @@ const getProducts = asyncHandler (async (req, res) => {
 
 
 // @desc Rertrieves a single product
-// @Route GET /api/collections/product/:id
+// @Route GET /api/product/:id
 // @access Public
 const getProductById  = asyncHandler (async (req, res) => {
     const id = req.params.id
