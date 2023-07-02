@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
 import SideBarLink from '../../components/sideBarLink/SideBarLink'
 import categories from '../../assets/categories/categories'
-import { getProducts } from "../../features/product/productSlice"
+import { getCollections } from "../../features/product/productSlice"
 
 function Collections() {
     // Retrieve path params to each collectionOverview
@@ -21,7 +21,7 @@ function Collections() {
   })
 
   useEffect(() => {
-    dispatch(getProducts(filters))
+    dispatch(getCollections(filters))
     
     if (isError) {
       toast.error(message)

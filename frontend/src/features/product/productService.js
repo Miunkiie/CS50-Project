@@ -9,8 +9,8 @@ const newArrivals = async (newArrivals) => {
     return response.data
 }
 
-// Get products
-const getProducts = async (filters) => {
+// Get collection products
+const getCollections = async (filters) => {
     const {gender, category, sort, q, colors, sizes} = filters
     let response;
 
@@ -33,10 +33,12 @@ const getProducts = async (filters) => {
     return response.data
 }
 
+// 
+
 
 const productService = {
     newArrivals,
-    getProducts
+    getCollections,
 }
 
 export default productService

@@ -39,7 +39,7 @@ function Product() {
   }
 
   const renderedImages = product.map((item, index) => 
-    <img key={index} src={placeholder} alt={item.description} />
+    <img key={index} src={item.image} alt={item.description} />
   )
 
   return (

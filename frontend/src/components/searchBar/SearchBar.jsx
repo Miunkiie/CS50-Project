@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { getProducts } from "../../features/product/productSlice"
+import { getCollections } from "../../features/product/productSlice"
 
 import './searchBar.css'
 
@@ -19,7 +19,7 @@ function SearchBar() {
 
     const query = searchedQuery.current.value
     
-    dispatch(getProducts({q: query || {}}))
+    dispatch(getCollections({q: query || {}}))
 
     setSearchParams({"q": query})
     

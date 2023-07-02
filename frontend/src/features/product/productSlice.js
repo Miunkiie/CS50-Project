@@ -29,9 +29,9 @@ export const newArrivals = createAsyncThunk('product/newArrivals', async (newArr
 })
 
 // Retrieve products
-export const getProducts = createAsyncThunk('product/getProducts', async (filters, thunkAPI) => {
+export const getCollections = createAsyncThunk('product/getCollections', async (filters, thunkAPI) => {
     try {
-        const products = await productService.getProducts(filters)
+        const products = await productService.getCollections(filters)
         
         return products.map(item => ({
             id: item._id,
@@ -69,15 +69,15 @@ export const productSlice = createSlice({
             state.message = action.payload
             state.product = null
         })
-                    .addCase(getProducts.pending, state => {
+                    .addCase(getCollections.pending, state => {
             state.isLoading = true
         })
-        .addCase(getProducts.fulfilled, (state, action) => {
+        .addCase(getCollections.fulfilled, (state, action) => {
             state.isLoading = false
             state.product = action.payload
 
         })
-        .addCase(getProducts.rejected, (state, action) => {
+        .addCase(getCollections.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import filterOptions from "../../assets/filters/filterOptions"
 import CollectionOverview from "../../components/collectionOverview/CollectionOverview"
 import FilterOptions from '../../components/filterOptions/FilterOptions'
-import { getProducts } from "../../features/product/productSlice"
+import { getCollections } from "../../features/product/productSlice"
 
 function Search() {
   const dispatch = useDispatch()
@@ -27,7 +27,7 @@ function Search() {
   )
 
   useEffect(() => {
-    dispatch(getProducts(filters))
+    dispatch(getCollections(filters))
 
     if (isError) {
       toast.error(message)
