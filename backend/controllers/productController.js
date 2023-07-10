@@ -92,7 +92,6 @@ const getProductById  = asyncHandler (async (req, res) => {
     }
 
     res.status(200).json(product)
-
 })
 
 
