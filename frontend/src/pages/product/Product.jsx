@@ -1,21 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
-import { newArrivals } from '../../features/product/productSlice'
-import Slider from "react-slick"
+import { useSelector } from 'react-redux'
+import { useRef, useEffect } from 'react'
 
-import placeholder from '../../assets/images/placeholder.jpg'
+import Slider from "react-slick"
 import './product.css'
 
 function Product() {
   const {product, isError, message} = useSelector(state => state.product)
-  const dispatch = useDispatch()
 
   const thumbnailSlider = useRef(null)
   const mainImageSlider = useRef(null)
-
-  useEffect(() => {
-    dispatch(newArrivals())
-  }, [dispatch])
 
   const thumbailSettings = {
     arrows: false,
@@ -38,8 +31,8 @@ function Product() {
     asNavFor: thumbnailSlider.current
   }
 
-  const renderedImages = product.map((item, index) => 
-    <img key={index} src={item.image} alt={item.description} />
+  const renderedImages = product["images"]?.map((value, index) => 
+    <img key={index} src={value} alt={product['description']} />
   )
 
   return (
