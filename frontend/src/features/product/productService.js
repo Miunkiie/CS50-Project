@@ -36,7 +36,7 @@ const getCollections = async (filters) => {
 // Get product 
 const getProduct = async (id) => {
     const response = await axios.get(API_URL + `product/${id}`)
-
+    
     return response.data
 }
 

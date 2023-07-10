@@ -49,18 +49,10 @@ export const getCollections = createAsyncThunk('product/getCollections', async (
     }
 })
 
-// get product
+// Get selected product
 export const getProduct = createAsyncThunk('product/getProduct', async (id, thunkAPI) => {
     try {
-        const product = await productService.getProduct(id)
-
-        return product.map(item => ({
-            id: item._id,
-            name: item.name,
-            price: item.price,
-            rating: item.rating,
-            image: item.images
-        }))
+        return await productService.getProduct(id)
 
     } catch (error) {
         const message = (error.response && error.response.data &&
@@ -124,6 +116,5 @@ export const productSlice = createSlice({
     }
 
 })
-
 
 export default productSlice.reducer
