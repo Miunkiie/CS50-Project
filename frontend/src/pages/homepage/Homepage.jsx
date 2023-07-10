@@ -1,10 +1,12 @@
 import {useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { newArrivals } from '../../features/product/productSlice'
 import { toast } from 'react-toastify'
+import Slider from "react-slick"
+import { useNavigate } from "react-router-dom"
+import { newArrivals } from '../../features/product/productSlice'
+import { getProduct } from '../../features/product/productSlice'
 
 import clearanceBanner from "../../assets/images/ClearanceBanner.png"
-import Slider from "react-slick"
 import { RxDividerHorizontal } from "react-icons/rx"
 import Banner from "../../components/banner/Banner"
 
@@ -12,6 +14,7 @@ import './homepage.css'
 
 function Homepage() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { product, isError, message } = useSelector(state => state.product)
 
   useEffect(() => {
@@ -32,11 +35,16 @@ function Homepage() {
     swipeToSlide: true,
   }
 
+  // Retrieve selected product 
+  const retrieveProduct = (e) => {
+    dispatch(getProduct(e.target.dataset.id))
+
+    navigate(`product/${e.target.dataset.name.replace(/\s+/g, '-').toLowerCase()}`)
+  }
+
   const renderedCarousel = product.map(item =>
-    // Replace the placeholder with image stored in AWS
-    <a href={`product/${item.name.replace(/\s+/g, '-').toLowerCase()}`} key={item.id}>
-      <img src={item.image} alt={item.description} />
-    </a>
+    <img key={item.id} src={item.image} alt={item.description} onClick={retrieveProduct}
+    data-id={item.id} data-name={item.name} />
   )
 
   return (
