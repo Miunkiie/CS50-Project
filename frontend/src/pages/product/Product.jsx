@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux'
 import { useRef, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 import Slider from "react-slick"
+import StarRatings from "../../components/starRatings/StarRatings"
 import './product.css'
 
 function Product() {
@@ -35,11 +37,18 @@ function Product() {
     <img key={index} src={value} alt={product['description']} />
   )
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+  }, [isError, message])
+
   return (
     <div className="product-container">
         breadcrumbs
         <div className="content-card">
-          <div className="product-image-section">
+          <section className="product-image-section">
             <div className="thumbnail-section">
               <Slider {...thumbailSettings} ref={thumbnailSlider}>
                 {renderedImages}
@@ -50,10 +59,19 @@ function Product() {
                 {renderedImages}
               </Slider>
             </div>
-          </div>
-          <div className="info-container">
-            Info section
-          </div>
+          </section>
+          <section className="info-container">
+            <div className="product-details">
+              <header className="product-title">
+                <h1>{product.name}</h1>
+              </header>
+              <p className='product-description'>{product.description}</p>
+              <div className="span-separation">
+                <span className="product-price">{`$${product.price}.00`}</span>
+                <StarRatings />
+              </div>
+            </div>
+          </section>
         </div>
     </div>
   )
