@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import Slider from "react-slick"
 import StarRatings from "../../components/starRatings/StarRatings"
+
 import './product.css'
 
 function Product() {
