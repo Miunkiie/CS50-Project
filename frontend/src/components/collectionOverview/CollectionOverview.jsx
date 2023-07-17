@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux' 
 
-import CollectionItem from "../../components/collectionItem/CollectionItem"
+import ProductCard from '../productCart/ProductCard'
 import CollapsibleBar from '../collapsibleBar/CollapsibleBar'
 import Sidebar from "../sidebar/Sidebar"
 import SortBy from '../sortBy/SortBy'
@@ -12,7 +12,12 @@ function CollectionOverview({setFilters, categories, title, heading}) {
 
   // Renders all products from that category
   const renderedCollection = product.map(item =>
-    <CollectionItem key={item.id} item={item} href={`/product/${item.name.replace(/\s+/g, '-').toLowerCase()}`} />
+    <ProductCard key={item.id} item={item}>
+      <div className="item-footer">
+        <h3>{item.name}</h3>
+        <h4>${item.price}</h4>
+      </div>
+    </ProductCard>
   )
 
   return (
@@ -28,7 +33,7 @@ function CollectionOverview({setFilters, categories, title, heading}) {
           {categories}
         </CollapsibleBar>
       </Sidebar>
-      <div className="item-grid">
+      <div className="collection-overview">
         {renderedCollection}
       </div>
     </div>
