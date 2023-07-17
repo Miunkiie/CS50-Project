@@ -1,32 +1,27 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { BsStarFill } from 'react-icons/bs'
 
 import './starRatings.css'
 
 function StarRatings() {
-    const [rating, setRating] = useState(0)
-    const [hover, setHover] = useState(0)
+    const {product} = useSelector(state => state.product)
 
     // Generate 5 empty stars
     const starRatings = [...Array(5)].map((star, index) => {
       index += 1;
 
       return (
-        <button type="button" key={index} className={index <= (hover || rating) ? "on" : "off"}
-        onClick={() => setRating(index)}
-        onMouseEnter={() => setHover(index)}
-        onMouseLeave={() => setHover(rating)}
-        >
+        <button type="button" key={index} className={index <= product.rating ? "on" : "off"}>
           <span className="stars"><BsStarFill /></span>
         </button>
       )
     })
 
   return (
-    <div className="star-rating">
+    <span className="star-rating">
         {starRatings}
-    </div>
+    </span>
   )
 }
 export default StarRatings
