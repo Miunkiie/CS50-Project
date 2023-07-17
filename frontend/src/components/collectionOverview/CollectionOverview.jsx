@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux' 
 
-import ProductCard from '../productCart/ProductCard'
+import ProductCard from '../productCard/ProductCard'
 import CollapsibleBar from '../collapsibleBar/CollapsibleBar'
 import Sidebar from "../sidebar/Sidebar"
 import SortBy from '../sortBy/SortBy'
